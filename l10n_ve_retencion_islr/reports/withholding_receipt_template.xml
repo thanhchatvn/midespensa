@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="l10n_ve_retencion_islr.report_withholding_receipt_document">
+    <t t-call="web.internal_layout">
+		<t t-foreach="docs" t-as="doc">
+        <t t-value="doc.with_context({'lang':doc.partner_id.lang})" />
+        <div class="page">
+			<div>
+				<tr>
+					<div style="display:block">
+						<div class="row pull-left">
+							<div class="col-xs-2 text-center">
+								<strong>
+<!--
+									<img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"
+									class="float-left" width="170px" alt="Company Logo"/><br/>
+-->
+									<span t-esc="doc.company_id.name"/><br/>
+									<span t-esc="doc.company_id.rif"/>
+								</strong>
+							</div>
+						</div>
+					</div>
+					<th><H5 class="text-center">COMPROBANTE DE RETENCIÓN  IMPUESTO SOBRE LA RENTA</H5></th>
+					<H6 class="text-center">Según decreto 1808 de fecha 23 de Abril de 1997 publicado en Gaceta Oficial
+						N° 36.203 de fecha de 12 de MAYO de 1997</H6>
+					<H5 align="right">COMPROBANTE</H5>
+					<H5 align="right">N° <span style="x-small;color:red" t-field="doc.number"/></H5><br></br>
+				</tr>
+			</div>
+<!--			<div class="row">-->
+<!--                  <div class="col-xs-4 pull-right">-->
+<!--                    <table class="table table-condensed">-->
+<!--                        <tr class="border-black text-center">-->
+<!--                            <td><strong>PERIODO FISCAL</strong></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td style="font-size: 12px" class="text-center">AÑO: <span t-field="doc.date" t-options="{'format': 'YYYY'}"/> /MES: <span t-field="doc.date" t-options="{'format': 'MM'}"/></td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+
+			<div align="center" valign="middle">
+				<table  valign="middle" class="table-bordered" width="95%">
+						<tr>
+							<th class="text-center" colspan="6" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">DATOS DEL AGENTE DE RETENCIÓN</th>
+							<th class="text-center" colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">FECHA DE EMISIÓN</th>
+						</tr>
+	<!--					<tr>-->
+	<!--						<th class="text-center" colspan="12" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; ">TESORERIA</th>-->
+	<!--					</tr>-->
+	<!--					<tr>-->
+	<!--						<th class="text-center" colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; ">NUMERO DE COMPROBANTE</th>-->
+	<!--						<td class="text-center" colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.number"/></td>-->
+	<!--						<td class="text-center" colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.date"/></td>-->
+	<!--					</tr>-->
+	<!--					<tr>-->
+	<!--						<th class="text-center" colspan="12" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; ">DATOS DEL AGENTE DE RETENCIÓN</th>-->
+	<!--					</tr>-->
+						<tr>
+							<th class="text-left" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">NOMBRE O RAZON SOCIAL</th>
+							<td class="text-center" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.company_id.name"/></td>
+							<td class="text-center" colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.date"/></td>
+	<!--						<td class="text-center" colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.company_id.rif"/></td>-->
+						</tr>
+						<tr>
+							<th class="text-left" colspan="3"  style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">DIRECCIÓN FISCAL</th>
+							<td class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><address t-field="doc.company_id.partner_id" t-options='{"widget": "contact", "fields": ["address"],"no_marker": True, "separator":". "}'/></td>
+						</tr>
+						<tr>
+							<th class="text-left" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">N° DE RIF</th>
+							<td class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.company_id.rif"/></td>
+						</tr>
+
+						<tr>
+							<td class="espacio" style="border: 1px !important"><br></br></td>
+						</tr>
+
+						<tr>
+							<th class="text-center" colspan="6" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">DATOS DEL CONTRIBUYENTE</th>
+							<th colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC "></th>
+						</tr>
+						<tr>
+							<th class="text-left" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">NOMBRE O RAZON SOCIAL</th>
+							<td class="text-center" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.partner_id.name"/></td>
+							<td colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "></td>
+	<!--						<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="o.partner_id.rif"/></td>-->
+						</tr>
+						<tr>
+							<th class="text-left" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">DIRECCIÓN fISCAL</th>
+							<td class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><address t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address"],"no_marker": True, "separator":". "}' /></td>
+						</tr>
+						<tr>
+							<th class="text-left" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">N° DE RIF</th>
+							<td class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.partner_id.rif"/></td>
+						</tr>
+						<tr>
+							<td class="espacio" style="border: 1px !important"><br></br></td>
+						</tr>
+						<tr>
+							<th class="text-center" colspan="6" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">DATOS DEL IMPUESTO RETENIDO</th>
+							<th colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">CÓD.ARCHIVO XML</th>
+						</tr>
+						<tr t-foreach="doc.withholding_line" t-as="c">
+							<td class="text-center" colspan="6" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="c.descripcion"/></td>
+							<th colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important;"></th>
+
+						</tr>
+						<tr>
+							<td class="espacio" style="border: 1px !important"><br></br></td>
+						</tr>
+	<!--					<tr>-->
+	<!--						<th class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "></th>-->
+	<!--						<th class="text-center" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; ">IMPORTE GRAVADO</th>-->
+	<!--						<th class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "></th>-->
+	<!--					</tr>-->
+						<tr>
+							<th class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">Oper. N°</th>
+<!--							<t t-if="doc.type == 'in_refund'">-->
+<!--	                            <th class="text-center" style="border: 1px ; border-style: solid ; border-color: #000; "  colspan="2">Fecha Nota de Crédito</th>-->
+<!--	                            <th class="text-center" style="border: 1px ; border-style: solid ; border-color: #000; "  colspan="1">Número Nota de Crédito</th>-->
+<!--	                        </t>-->
+	                        <t>
+	                            <th class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC " colspan="1">Fecha de la Factura</th>
+	                            <th t-if="doc.type == 'in_invoice'" class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC " colspan="1">Número de la Factura</th>
+<!--								<th t-if="doc.type == 'in_refund'" class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC " colspan="1">Número de la Factura</th>-->
+
+							</t>
+							<th class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">Número de Control</th>
+							<th class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">Monto Total</th>
+							<th class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">Base Imponible</th>
+							<th class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">% de Retención</th>
+							<th class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">Monto Retenido</th>
+						</tr>
+						<t t-set="iterador" t-value="1"/>
+						<tr t-if="doc.type =='in_refund'" t-foreach="doc.mapped('withholding_line.invoice_id.reversed_entry_id.withholding_id.withholding_line')" t-as="l">
+							<t t-if="doc.state !='annulled'">
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-esc="iterador"/></td>
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.invoice_date"/></td>
+<!--								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.vendor_invoice_number"/></td>-->
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.control_invoice_number"/></td>
+								<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="l.invoice_id.type == 'in_refund'">-</t><span t-field="l.invoice_id.amount_total"/></td>
+								<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="l.invoice_id.type == 'in_refund'">-</t><span t-field="l.invoice_id.amount_untaxed"/></td>
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.porc_islr"/></td>
+								<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="l.invoice_id.type == 'in_refund'">-</t><span t-field="l.ret_amount"/></td>
+								<t t-set="iterador" t-value="iterador+1"/>
+							</t>
+
+						</tr>
+						<t t-set="iterador" t-value="1"/>
+						<tr t-foreach="doc.mapped('withholding_line.invoice_id.debit_origin_id.withholding_id.withholding_line')" t-as="l">
+							<t t-if="doc.state !='annulled'">
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-esc="iterador"/></td>
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.invoice_date"/></td>
+								<td t-if="doc.type == 'in_invoice'"  class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.vendor_invoice_number"/></td>
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.control_invoice_number"/></td>
+								<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><span t-field="l.invoice_id.amount_total"/></td>
+								<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><span t-field="l.invoice_id.amount_untaxed"/></td>
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.porc_islr"/></td>
+								<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><span t-field="l.ret_amount"/></td>
+								<t t-set="iterador" t-value="iterador+1"/>
+							</t>
+						</tr>
+						<t t-set="iterador" t-value="1"/>
+						<tr t-foreach="doc.withholding_line" t-as="l">
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-esc="iterador"/></td>
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.invoice_date"/></td>
+								<td t-if="doc.type == 'in_invoice'"  class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.vendor_invoice_number"/></td>
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.control_invoice_number"/></td>
+								<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><span t-field="l.invoice_id.amount_total"/></td>
+								<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><span t-field="l.invoice_id.amount_untaxed"/></td>
+								<td class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.porc_islr"/></td>
+								<td class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><span t-field="l.ret_amount"/></td>
+								<t t-set="iterador" t-value="iterador+1"/>
+						</tr>
+						<tr>
+							<th t-if="doc.type == 'in_invoice'" class="text-right" colspan="4" style="border: 1px !important;">TOTAL</th><!--Verificar para ver en caso de factura Cliente -->
+							<th t-if="doc.type == 'in_invoice'" class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><t t-esc="sum(doc.mapped('withholding_line.invoice_id.amount_total'))+sum(doc.mapped('withholding_line.invoice_id.debit_origin_id.amount_total'))" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id, 'from_currency': doc.currency_id}"/></th>
+							<th t-if="doc.type == 'in_invoice'" class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><t t-esc="sum(doc.mapped('withholding_line.invoice_id.amount_untaxed'))+sum(doc.mapped('withholding_line.invoice_id.debit_origin_id.amount_untaxed'))" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id, 'from_currency': doc.currency_id}"/></th>
+							<th t-if="doc.type == 'in_invoice'" class="text-right" colspan="1" style="border: 1px !important;">TOTAL</th>
+							<th t-if="doc.type == 'in_invoice'" class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><t t-esc="sum(doc.mapped('withholding_line.ret_amount'))+sum(doc.mapped('withholding_line.invoice_id.debit_origin_id.withholding_id.withholding_line.ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id, 'from_currency': doc.currency_id}"/></th>
+						</tr>
+						<tr t-if="doc.type == 'out_invoice'"> <!--Verificar para ver en caso de factura Cliente -->
+							<th class="text-right" colspan="3" style="border: 1px !important;">TOTAL</th>
+							<th class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><t t-esc="sum(doc.mapped('withholding_line.amount_invoice'))" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id, 'from_currency': doc.currency_id}"/></th>
+							<th class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><t t-esc="sum(doc.mapped('withholding_line.invoice_id.amount_untaxed'))" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id, 'from_currency': doc.currency_id}"/></th>
+							<th class="text-right" colspan="1" style="border: 1px !important;">TOTAL</th>
+							<th class="text-center" colspan="2" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><t t-esc="sum(doc.mapped('withholding_line.ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id, 'from_currency': doc.currency_id}"/></th>
+						</tr>
+						<tr>
+							<td class="espacio" style="border: 1px !important"><br></br></td>
+						</tr>
+						<tr>
+							<td class="text-center" style="border: 1px !important" colspan="5"></td>
+							<th t-if="doc.type == 'in_invoice' or doc.type == 'in_refund' " class="text-center" colspan="4" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important;">TOTAL DE IMPUESTO RETENIDO</th>
+							<th t-if="doc.type != 'in_invoice' and doc.type != 'in_refund' " class="text-center" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important;">TOTAL DE IMPUESTO RETENIDO</th>
+							<th t-if="doc.type == 'in_invoice'" class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><t t-esc="sum(doc.mapped('withholding_line.ret_amount'))+sum(doc.mapped('withholding_line.invoice_id.debit_origin_id.withholding_id.withholding_line.ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id, 'from_currency': doc.currency_id}"/></th>
+							<th t-if="doc.type == 'in_refund'" class="text-right" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-esc="sum(doc.mapped('withholding_line.invoice_id.reversed_entry_id.withholding_id.withholding_line.ret_amount'))-sum(doc.mapped('withholding_line.ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id, 'from_currency': doc.currency_id}"/></th>
+							<th t-if="doc.type != 'in_invoice' and doc.type != 'in_refund' " class="text-center" colspan="1" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><t t-if="doc.type == 'in_refund'">-</t><t t-esc="sum(doc.mapped('withholding_line.ret_amount'))+sum(doc.mapped('withholding_line.invoice_id.debit_origin_id.withholding_id.withholding_line.ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id, 'from_currency': doc.currency_id}"/></th>
+						</tr>
+						<tr>
+							<td class="espacio" style="border: 1px !important"><br></br></td>
+						</tr>
+						<tr>
+							<td class="text-center" style="border: 1px ; border-style: solid ; border-color: #000; "   colspan="4" height="100px" valign="bottom"></td>
+							<td class="text-center" style="border: 1px ; border-style: solid ; border-color: #000; "   colspan="6" height="100px" valign="bottom"></td>
+						</tr>
+						<tr>
+							<th class="text-center" style="border: 1px ; border-style: solid ; border-color: #000; background-color:#D5D8DC "   colspan="4"  valign="bottom">FIRMA Y SELLO DEL AGENTE DE RETENCIÓN</th>
+	                        <th class="text-center" style="border: 1px ; border-style: solid ; border-color: #000; background-color:#D5D8DC "  colspan="6"  valign="bottom">FIRMA Y SELLO DEL BENEFICIARIO</th>
+						</tr>
+				</table>
+			</div>
+        </div>
+		</t>
+    </t>
+<!--    <t t-call="l10n_ve_fiscal_requirements.internal_layout_footer_laws"/>-->
+</template>
+
+<template id="l10n_ve_retencion_islr.report_withholding_receipt">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="l10n_ve_retencion_islr.report_withholding_receipt_document" />
+        </t>
+    </t>
+</template>
+
+</data>
+</odoo>

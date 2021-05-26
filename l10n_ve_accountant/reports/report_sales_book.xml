@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="paperformat_sales_book" model="report.paperformat">
+            <field name="name">European A4 Landscape</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">4</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+                id="sales_book"
+                model="account.move"
+                string="Sales book"
+                report_type="qweb-pdf"
+                name="l10n_ve_accountant.report_sales_book"
+                file="l10n_ve_accountant.report_sales_book"
+                paperformat="paperformat_sales_book"
+
+        />
+
+
+
+
+        <template id="l10n_ve_accountant.report_sales_book">
+            <t t-call="web.html_container">
+                <t t-set="data_report_margin_top" t-value="12"/>
+                <t t-set="data_report_header_spacing" t-value="9"/>
+                <t t-set="data_report_dpi" t-value="110"/>
+                <t t-call="l10n_ve_accountant.report_sales_book_doc"/>
+            </t>
+        </template>
+
+        <template id="l10n_ve_accountant.report_sales_book_doc">
+             <t t-call="web.basic_layout">
+                    <div class="page" style ="font-size:12px;font-family: Times;line-height: 1.6;">
+                    <div style="display:inline-block; font-size:12px;"  align="center">
+                            <table style="padding: 5px; border: none; ">
+                                    <tr>
+                                        <img t-if="docs.company_id.logo" t-att-src="image_data_uri(docs.company_id.logo)" height="50px" style="margin-top: 0px; max-width: 150px;"/>
+                                    </tr><br/>
+                                    <tr>
+                                        <span t-esc="docs.company_id.name"/>
+                                    </tr>
+                            </table>
+                    </div>
+                    <h4 class="text-center">Libro de Ventas</h4>
+                        <style type="text/css">
+                                table.tableizer-table{
+                                font-size:10px;
+                                font-family: Arial, Helvetica, sans-serif;
+                                }
+                                .tableizer-table td{
+                                border: 1px solid #000;
+                                font-size:10px;
+                                text-align: center;
+                                }
+                                .tableizer-table th {
+                                font-weight: bold;
+                                text-align: center;
+                                border: 1px solid #000;
+                                font-size:10px;
+                                background-color:#BFBFBF;
+                                }
+                                tr.total td {
+                                background: transparent;
+                                border-style: none ;
+                                }
+                                table {text-align:center}
+                                .table-bordered {
+                                empty-cells: hide;
+                                }
+                                .table-bordered tr td:nth-child(1){
+                                text-align:left;
+                                }
+                        </style>
+                    <t t-set="R40" t-value="False"/>
+                    <t t-set="R41" t-value="False"/>
+                    <t t-set="R42" t-value="False"/>
+                    <t t-set="R43" t-value="False"/>
+                    <t t-set="R442" t-value="False"/>
+                    <t t-set="R452" t-value="False"/>
+                    <t t-set="R443" t-value="False"/>
+                    <t t-set="R453" t-value="False"/>
+                    <t t-set="R46" t-value="False"/>
+                    <t t-set="R47" t-value="False"/>
+                    <t t-set="R54" t-value="False"/>
+                    <t t-set="R62" t-value="False"/>
+                    <t t-set="R34" t-value="False"/>
+                    <t t-set="R35" t-value="False"/>
+                    <t t-set="R36" t-value="False"/>
+                    <t t-set="untaxed" t-value="0"/>
+                    <t t-set="tax" t-value="0"/>
+                    <t t-set="retencion" t-value="0"/>
+                    <t t-set="total" t-value="0"/>
+                    <t t-set="iva_percibido"  t-value="0"/>
+                    <t t-set="iva_percibido_g"  t-value="0"/>
+                    <t t-set="iva_percibido_r"  t-value="0"/>
+                    <t t-set="iva_percibido_ga"  t-value="0"/>
+                    <div class="row" style="width:100%; margin-left: 70px">
+                        <div class="col-xs-4" style="width:40%;">
+                            <strong>Journals</strong>
+                            <p t-esc="', '.join([ lt or '' for lt in print_journal ])"/>
+                        </div>
+                        <div class="col-xs-4" style="width:30%;">
+                            <strong>Display Account</strong>
+                            <p>
+                                <span t-if="data['display_account'] == 'all'">All accounts'</span>
+                                <span t-if="data['display_account'] == 'movement'">With movements</span>
+                                <span t-if="data['display_account'] == 'not_zero'">With balance not equal to zero</span>
+                            </p>
+                        </div>
+                        <div class="col-xs-4" style="width:30%;">
+                            <strong>Target Moves:</strong>
+                            <p t-if="data['target_move'] == 'all'">All Entries</p>
+                            <p t-if="data['target_move'] == 'posted'">All Posted Entries</p>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="row" style="width:100%; margin-left: 70px">
+                            <div style="width:40%;">
+                                <strong>Sorted By:</strong>
+                                <p t-if="data['sortby'] == 'sort_date'">Date</p>
+                                <p t-if="data['sortby'] == 'sort_journal_partner'">Journal and Partner</p>
+                            </div>
+                            <div style="width:30%;">
+                                <strong>Currency</strong>
+                            <p>
+                                <span t-esc="currency_id.name"/>
+                            </p>
+                            </div>
+                            <div style="width:30%;">
+                                <t t-if="data['date_from']">
+                                    <strong>Date from :</strong>
+                                    <span t-esc="data['date_from']"/>
+                                    <br/>
+                                </t>
+                                <t t-if="data['date_to']">
+                                    <strong>Date to :</strong>
+                                    <span t-esc="data['date_to']"/>
+                                </t>
+                            </div>
+                    </div>
+                    <br/>
+<!--                        Tabla Principal-->
+                    <table class="tableizer-table">
+                        <thead>
+                            <tr>
+                                <th colspan="12" style="background: transparent;border-style: none ;"></th>
+                                <th colspan="3" style="text-align:center;border: 1px solid #000; font-size:10px">VENTAS INTERNAS O EXPORTACION GRAVADAS</th>
+                            </tr>
+                            <tr>
+                                <th>Oper. N°</th>
+                                <th>Fecha de la Factura</th>
+                                <th>RIF</th>
+                                <th>Nombre o Razón Social</th>
+                                <th>Número de Factura.</th>
+                                <th>Núm. Ctrol. de Factura</th>
+                                <th>Número Nota Debit.</th>
+                                <th>Número de Nota Crdto.</th>
+                                <th>Tipo de Transacc.</th>
+                                <th>Número de Factura Afectada</th>
+                                <th>Total Ventas Incluyendo el IVA</th>
+                                <th>Ventas Internas No Gravadas</th>
+                                <th>Base Imponible</th>
+                                <th>% Alícuota</th>
+                                <th>Impuesto IVA</th>
+                                <th>IVA Retenido (por el comprador)</th>
+                                <th>IVA Percibido</th>
+<!--                                    <th>Anticipo de IVA (importación)</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="count" t-value="0"/>
+                            <t t-set="fac" t-value="fact.filtered(lambda doc: doc.transaction_type != '04-ajuste')"/>
+                            <t t-foreach="fac" t-as="s">
+                            <t t-set="count" t-value="count+1"/>
+                            <t t-if="s.state !='annulled'">
+                                <tr>
+                                    <td><t t-esc="count"/></td>
+                                    <td><span t-esc="s.date"/></td>
+                                    <td><span t-esc="s.partner_id.rif"/></td>
+                                    <td><span t-esc="s.partner_id.name"/></td>
+<!--                                    <td><span t-esc="s.ref"/></td>-->
+                                    <td><span t-esc="s.name"/></td>
+                                    <td><span t-esc="s.control_invoice_number"/></td>
+                                    <td><span t-esc="s.name if s.debit_origin_id else '-'"/></td>
+                                    <td><span t-esc="s.name if s.type == 'out_refund' else '-'"/></td>
+                                    <td><span t-esc="s.transaction_type"/></td>
+                                    <td><span t-esc="s.reversed_entry_id.name or s.debit_origin_id.name if s.type == 'out_refund' or s.debit_origin_id else '-'"/></td>
+                                    <td><t t-if="s.type == 'out_refund'">-</t><span t-esc="sum(s.mapped('amount_total'))" t-options="{'widget': 'monetary', 'display_currency': s.currency_id, 'from_currency': s.currency_id}"/></td>
+                                    <t t-set="total" t-if="s.type == 'out_invoice'" t-value="total + sum(s.mapped('amount_total'))"/>
+                                    <t t-set="total" t-if="s.type == 'out_refund'" t-value="total - sum(s.mapped('amount_total'))"/>
+                                    <td><t t-if="s.type == 'out_refund'">-</t><span t-options="{'widget': 'monetary', 'display_currency':s.currency_id, 'from_currency':s.currency_id}"
+                                              t-esc="sum(s.invoice_line_ids.filtered(lambda line: not len(line.tax_ids)).mapped('price_subtotal'))"/>
+                                    </td>
+<!--                                    <td>Base Imponible</td>-->
+                                     <td><t t-if="s.type == 'out_refund'">-</t><span t-options="{'widget': 'monetary', 'display_currency':s.currency_id, 'from_currency':s.currency_id}"
+                                              t-esc="sum(s.invoice_line_ids.filtered(lambda line: len(line.tax_ids) > 0).mapped('price_subtotal'))"/>
+                                    </td>
+<!--                                    <td><t t-if="s.type == 'out_refund' and s.amount_untaxed > 0">-</t><span t-if="s.partner_id.company_type == 'company'"-->
+<!--                                            t-options="{'widget': 'monetary', 'display_currency':s.currency_id, 'from_currency':s.currency_id}"-->
+<!--                                           t-esc="s.amount_untaxed"/></td>-->
+                                    <t t-set="untaxed" t-if="s.type == 'out_invoice'" t-value="untaxed + sum(s.invoice_line_ids.filtered(lambda line: len(line.tax_ids) > 0).mapped('price_subtotal'))"/>
+                                    <t t-set="untaxed" t-if="s.type == 'out_refund'" t-value="untaxed - sum(s.invoice_line_ids.filtered(lambda line: len(line.tax_ids) > 0).mapped('price_subtotal'))"/>
+                                    <t t-if="len(s.invoice_line_ids.filtered(lambda line: len(line.mapped('tax_ids').filtered(lambda tax: tax.aliquot_type == 'reduced'))))">
+                                        <t t-if="s.type == 'out_invoice'" t-set="R443" t-value="R443 +sum(s.invoice_line_ids.filtered(lambda line: len(line.mapped('tax_ids').filtered(lambda tax: tax.aliquot_type == 'reduced'))).mapped('price_subtotal'))"/>
+                                        <t t-if="s.type == 'out_refund'" t-set="R443" t-value="R443 -sum(s.invoice_line_ids.filtered(lambda line: len(line.mapped('tax_ids').filtered(lambda tax: tax.aliquot_type == 'reduced'))).mapped('price_subtotal'))"/>
+                                    </t>
+                                    <t t-if="sum(s.invoice_line_ids.mapped('tax_ids.amount')) == 16">
+                                        <t t-if="s.type == 'out_invoice'">
+                                            <t t-set="R42" t-value="R42 + sum(s.invoice_line_ids.filtered(lambda line: len(line.tax_ids) > 0).mapped('price_subtotal'))"/>
+                                            <t t-set="R43" t-value="R43 + s.amount_tax"/>
+                                            <t t-set="iva_percibido_g" t-value="iva_percibido_g+((s.amount_tax)-(s.wh_id.total_tax_ret))"/>
+                                        </t>
+                                        <t t-if="s.type == 'out_refund'">
+                                            <t t-set="R42" t-value="R42 - sum(s.invoice_line_ids.filtered(lambda line: line.tax_ids.active == True).mapped('price_subtotal'))"/>
+                                            <t t-set="R43" t-value="R43 - s.amount_tax"/>
+                                            <t t-set="iva_percibido_g" t-value="iva_percibido_g-((s.amount_tax)-(s.wh_id.total_tax_ret))"/>
+                                        </t>
+
+                                    </t>
+                                    <t t-if="sum(s.invoice_line_ids.mapped('tax_ids.amount')) &gt; 16 and s.type == 'out_invoice'">
+                                        <t t-set="R442" t-value="R442 + sum(s.invoice_line_ids.filtered(lambda line: len(line.tax_ids) > 0).mapped('price_subtotal'))"/>
+                                        <t t-set="R452" t-value="R452 + s.amount_tax"/>
+                                        <t t-set="iva_percibido_ga" t-value="iva_percibido_ga+((s.amount_tax)-(s.wh_id.total_tax_ret))"/>
+                                    </t>
+                                    <t t-if="sum(s.invoice_line_ids.mapped('tax_ids.amount')) &gt; 16 and s.type == 'out_refund'">
+                                        <t t-set="R442" t-value="R442 - sum(s.invoice_line_ids.filtered(lambda line: len(line.tax_ids) > 0).mapped('price_subtotal'))"/>
+                                        <t t-set="R452" t-value="R452 - s.amount_tax"/>
+                                        <t t-set="iva_percibido_ga" t-value="iva_percibido_ga-((s.amount_tax)-(s.wh_id.total_tax_ret))"/>
+                                    </t>
+                                    <td><span t-esc="sum(s.invoice_line_ids.mapped('tax_ids.amount'))"/>%</td>
+                                    <td><t t-if="s.type == 'out_refund'">-</t><span t-esc="s.amount_tax" t-options="{'widget': 'monetary', 'display_currency': s.currency_id, 'from_currency': s.currency_id}"/>
+                                    </td>
+                                    <t t-set="tax" t-if="s.type == 'out_invoice'" t-value="tax + s.amount_tax"/>
+                                    <t t-set="tax" t-if="s.type == 'out_refund'" t-value="tax - s.amount_tax"/>
+
+<!--                                    <t t-if="sum(s.invoice_line_ids.mapped('tax_ids.amount')) &lt; 16" t-set="R343" t-value="R343 + s.amount_tax"/>-->
+                                     <td ><t t-if="s.type == 'out_refund'">-</t><span t-options="{'widget': 'monetary', 'display_currency':s.currency_id, 'from_currency':s.currency_id}"
+                                             t-esc="s.wh_id.total_tax_ret"/>
+                                     </td>
+                                    <t t-if="sum(s.invoice_line_ids.mapped('tax_ids.amount')) == 16" t-set="R34" t-value="R34 +s.wh_id.total_tax_ret"/>
+
+                                    <t t-if="s.type == 'out_invoice'" t-set="retencion" t-value="retencion + s.wh_id.total_tax_ret"/>
+                                    <t t-if="s.type == 'out_refund'" t-set="retencion" t-value="retencion - s.wh_id.total_tax_ret"/>
+                                    <td><t t-if="s.type == 'out_refund'">-</t><span t-options="{'widget': 'monetary', 'display_currency':s.currency_id, 'from_currency':s.currency_id}"
+                                           t-esc="(s.amount_tax)-(s.wh_id.total_tax_ret)"/>
+                                    </td>
+<!--                                    <t t-if="sum(s.invoice_line_ids.mapped('tax_ids.amount')) == 16" t-set="R36" t-value="R34 +((s.amount_tax)-(s.wh_id.total_tax_ret))"/>-->
+                                    <t t-if="s.type == 'out_invoice'" t-set="iva_percibido" t-value="iva_percibido+((s.amount_tax)-(s.wh_id.total_tax_ret))"/>
+                                    <t t-if="s.type == 'out_refund'" t-set="iva_percibido" t-value="iva_percibido-((s.amount_tax)-(s.wh_id.total_tax_ret))"/>
+                               </tr>
+                            </t>
+                            </t>
+
+                            <tr class="total">
+                                <td colspan="9" style="text-align:center"></td>
+                                <td colspan="1" style="text-align:center"><strong>TOTAL</strong></td>
+                                <th><span t-esc="total" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                <th><span t-esc="sum(fac.invoice_line_ids.filtered(lambda lx: not len(lx.tax_ids)).mapped('price_subtotal'))" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                <t t-set="R40" t-value="sum(fac.invoice_line_ids.filtered(lambda lx: not len(lx.tax_ids)).mapped('price_subtotal'))"/>
+                                <th><span t-esc="untaxed" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                <th></th>
+                                <th><span t-esc="tax" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                <th><span t-esc="retencion" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                <th><span t-esc="iva_percibido" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                            </tr>
+
+                        </tbody>
+<!--                        Se definen las variables dependientes de otras&ndash;&gt;-->
+                                <t t-set="R46" t-value="R40+R41+R42+R442"/>
+                                <t t-set="R47" t-value="R43+R452"/>
+                                <t t-set="R54" t-value="R34"/>
+<!--                                <t t-set="R342" t-value="R342-R322"/>-->
+<!--                                <t t-set="R343" t-value="R343-R323"/>-->
+                    </table>
+                    <br/>
+                    <div class="col-xs-4" align="right">
+                        <table class="tableizer-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Base imponible</th>
+                                    <!--                                    <th style="border-style:none" width="20px"/>-->
+                                    <th>Debito  fiscal</th>
+                                    <th/>
+                                    <th>IVA Retenido por el Comprador</th>
+                                    <th/>
+                                    <th>IVA Percibido</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="ducs" t-value="docs.filtered(lambda doc: doc.wh_lines.invoice_id.transaction_type != '04-ajuste')"/>
+                                    <tr>
+                                        <td>Total : Ventas Internas No Gravadas</td>
+                                        <td><strong>40</strong></td>
+                                        <td><t t-if="R40" t-esc="R40" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                        <td/>
+                                        <td/>
+                                        <td>0,00</td>
+                                        <td/>
+                                        <td>0,00</td>
+                                    </tr>
+<!--                                    <tr>-->
+<!--                                        <td>Ventas de Exportacion </td>-->
+<!--                                        <td><strong>41</strong></td>-->
+<!--                                        <td></td>-->
+<!--                                    </tr>-->
+                                <tr>
+                                    <td>Total : Ventas Internas Afectas solo Alicuota General</td>
+<!--                                    Base Imponible-->
+                                    <td><strong>42</strong></td>
+                                    <td><t t-if="R42" t-esc="R42" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+<!--                                    Debito Fiscal-->
+                                    <td><t t-if="R43" t-esc="R43" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                    <td><strong>43</strong></td>
+<!--                                   Iva retenido por comprador-->
+                                    <td><t t-if="retencion" t-esc="retencion" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                    <td></td>
+<!--                                    Iva percibido-->
+                                    <td><t t-if="iva_percibido_g" t-esc="iva_percibido_g" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Total : Ventas Internas Afectas en Alicuota General + Adicional</td>
+                                    <td><strong>442</strong></td>
+<!--                                    Base Imponible-->
+                                    <td><t t-if="R442" t-esc="R442" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+<!--                                    Debito fiscal-->
+                                    <td><t t-if="R452" t-esc="R452" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                    <td><strong>452</strong></td>
+<!--                                    Iva retenido por el Comprador-->
+                                    <td></td>
+                                    <td></td>
+                                    <td>0,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Total : Ventas Internas Afectas en Alicuota Reducidal</td>
+                                    <td><strong>443</strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>453</strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0,00</td>
+                                </tr>
+                                <tr class="total">
+                                    <td><strong>Total</strong></td>
+                                    <td><strong>46</strong></td>
+<!--                                    Base Imponible-->
+                                    <td><t t-if="R46" t-esc="R46" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+<!--                                    Debito fiscal-->
+                                    <td><t t-if="R47" t-esc="R47" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                    <td><strong>47</strong></td>
+<!--                                    Iva del comprador        -->
+                                    <td><t t-if="R54" t-esc="R54" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                    <td></td>
+                                    <td><t t-if="iva_percibido" t-esc="iva_percibido" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                </t>
+
+        </template>
+
+    </data>
+</odoo>

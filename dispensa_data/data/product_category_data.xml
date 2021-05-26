@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="product_category_001" model="product.category">
+            <field name="name">001</field>
+        </record>
+        <record id="product_category_002" model="product.category">
+            <field name="name">002</field>
+        </record>
+        <record id="product_category_003" model="product.category">
+            <field name="name">003</field>
+        </record>
+        <record id="product_category_004" model="product.category">
+            <field name="name">004</field>
+        </record>
+        <record id="product_category_005" model="product.category">
+            <field name="name">005</field>
+        </record>
+        <record id="product_category_006" model="product.category">
+            <field name="name">006</field>
+        </record>
+        <record id="product_category_007" model="product.category">
+            <field name="name">007</field>
+        </record>
+        <record id="product_category_008" model="product.category">
+            <field name="name">008</field>
+        </record>
+        <record id="product_category_009" model="product.category">
+            <field name="name">009</field>
+        </record>
+        <record id="product_category_010" model="product.category">
+            <field name="name">010</field>
+        </record>
+        <record id="product_category_011" model="product.category">
+            <field name="name">011</field>
+        </record>
+        <record id="product_category_012" model="product.category">
+            <field name="name">012</field>
+        </record>
+        <record id="product_category_013" model="product.category">
+            <field name="name">013</field>
+        </record>
+        <record id="product_category_014" model="product.category">
+            <field name="name">014</field>
+        </record>
+        <record id="product_category_015" model="product.category">
+            <field name="name">015</field>
+        </record>
+        <record id="product_category_016" model="product.category">
+            <field name="name">016</field>
+        </record>
+        <record id="product_category_017" model="product.category">
+            <field name="name">017</field>
+        </record>
+        <record id="product_category_018" model="product.category">
+            <field name="name">018</field>
+        </record>
+        <record id="product_category_019" model="product.category">
+            <field name="name">019</field>
+        </record>
+        <record id="product_category_020" model="product.category">
+            <field name="name">020</field>
+        </record>
+        <record id="product_category_021" model="product.category">
+            <field name="name">021</field>
+        </record>
+        <record id="product_category_CEST" model="product.category">
+            <field name="name">CEST</field>
+        </record>
+        <record id="product_category_GEN" model="product.category">
+            <field name="name">GEN</field>
+        </record>
+        <record id="product_category_IMP" model="product.category">
+            <field name="name">IMP</field>
+        </record>
+        <record id="product_category_OFER" model="product.category">
+            <field name="name">OFER</field>
+        </record>
+        <record id="product_category_VERD" model="product.category">
+            <field name="name">VERD</field>
+        </record>
+    
+    </data>
+</odoo>

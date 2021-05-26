@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-extend="FormView.buttons">
+        <t t-jquery=".o_form_button_create" t-operation="after">
+            <button t-if="widget.modelName == 'pos.session'" type="button" class="btn btn btn-danger o_printer_reports_z">
+                    Imprimir Reporte Z
+            </button>
+            <button t-if="widget.modelName == 'pos.session'" type="button" class="btn btn btn-danger o_printer_reports_x">
+                    Imprimir Reporte X
+            </button>
+        </t>
+    </t>
+
+
+</templates>

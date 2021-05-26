@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="view_book_export_excel" model="ir.ui.view">
+            <field name="name">Report Excel</field>
+            <field name="model">book.export.excel</field>
+            <field name="arch" type="xml">
+                <form string="Download Report Excel">
+                    <div class="alert alert-info text-center" role="alert" style="margin-bottom:0px;">
+                        The Excel file was generated correctly, proceed to download it.
+                    </div>
+                    <group>
+                        <field name="excel_file" readonly="1" filename="file_name"/>
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="Close" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_book_export_excel" model="ir.actions.act_window">
+            <field name="name">Report Excel</field>
+            <field name="view_id" ref="view_book_export_excel"/>
+            <field name="view_mode">form</field>
+            <field name="res_model">book.export.excel</field>
+            <field name="target">new</field>
+        </record>
+
+            
+   </data>
+</odoo>

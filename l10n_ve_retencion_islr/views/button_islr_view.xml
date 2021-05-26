@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="create_islr_button_form_view" model="ir.ui.view">
+            <field name="name">create islr button form view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='button_draft']" position="after">
+                     <button name="create_retentions" string="Create islr retention" class="oe_highlight"
+                             type="object" attrs="{'invisible': ['|',('state', '!=', 'draft'),('withholding_id', '!=', False)]}"/>
+                     <button name="delete_retentions" string="Eliminar retención islr" class="oe_highlight"
+                            type="object" attrs="{'invisible': ['|',('state', '!=', 'draft'),('withholding_id', '=', False)]}"/>
+                     <button name="print_withholding_receipt_xml" icon="fa-download" attrs="{'invisible': [('withholding_id', '==', False)]}" string="Comprobante de retención islr " type="object"/>
+
+                </xpath>
+
+<!--                <xpath expr="//button[@name='button_cancel']" position="after">-->
+<!--                    <button name="print_withholding_receipt_xml" icon="fa-download" attrs="{'invisible': [('withholding_id', '==', False)]}" string="Withholding receipt" type="object"/>-->
+<!--                </xpath>-->
+
+
+                <xpath expr="//field[@name='transaction_type']" position="before">
+                     <field name="withholding_id" string="Withholding ISLR"/>
+                </xpath>
+
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="amount_wh_islr" attrs="{'invisible': [('withholding_id', '=', False)]}"/>
+<!--                    <field name="amount_residual" class="oe_subtotal_footer_separator"/>-->
+                </xpath>
+
+            </field>
+        </record>
+
+</odoo>

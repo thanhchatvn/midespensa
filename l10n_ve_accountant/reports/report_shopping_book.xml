@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    
+    <data>
+     <record id="paperformat_book_purchase" model="report.paperformat">
+            <field name="name">European A4 Landscape</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">4</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+    </record>
+
+    <report
+            id="shooppin_book"
+            model="account.move"
+            string="Shopping book"
+            report_type="qweb-pdf"
+            name="l10n_ve_accountant.report_shooping_book"
+            paperformat="paperformat_book_purchase"
+        />
+    
+         <template id="report_shooping_book">
+            <t t-call="web.html_container">
+            <t t-set="data_report_margin_top" t-value="12"/>
+            <t t-set="data_report_header_spacing" t-value="9"/>
+            <t t-set="data_report_dpi" t-value="110"/>
+
+            <t t-call="web.internal_layout">
+                <div class="page" style ="font-size:12px;font-family: Times;line-height: 1.6;">
+                    <div style="display:inline-block; font-size:12px;"  align="center">
+                        <table style="padding: 5px; border: none;">
+                           <tr>
+                               <img t-if="docs.company_id.logo" t-att-src="image_data_uri(docs.company_id.logo)" height="50px" style="margin-top: 0px; max-width: 150px;"/>
+                           </tr><br/>
+                           <tr>
+                               <span t-esc="docs.company_id.name"/>
+                           </tr>
+                        </table>
+                    </div>
+                <h4><center>Libro de Compras</center></h4>
+                            <style type="text/css">
+                                table.tableizer-table{
+                                font-size:10px;
+                                font-family: Arial, Helvetica, sans-serif;
+                                }
+                                .tableizer-table td{
+                                border: 1px solid #000;
+                                font-size:10px;
+                                text-align: center;
+                                }
+                                .tableizer-table th {
+                                font-weight: bold;
+                                text-align: center;
+                                border: 1px solid #000;
+                                font-size:10px;
+                                background-color:#BFBFBF;
+                                }
+                                tr.total td {
+                                background: transparent;
+                                border-style: none ;
+                                }
+                                table {text-align:center}
+                                .table-bordered {
+                                empty-cells: hide;
+                                }
+                                .table-bordered tr td:nth-child(1){
+                                text-align:left;
+                                }
+                            </style>
+                    <t t-set="R30" t-value="False"/>
+                    <t t-set="R31" t-value="False"/>
+                    <t t-set="R32" t-value="False"/>
+                    <t t-set="R312" t-value="False"/>
+                    <t t-set="R313" t-value="False"/>
+                    <t t-set="R322" t-value="False"/>
+                    <t t-set="R323" t-value="False"/>
+                    <t t-set="R332" t-value="False"/>
+                    <t t-set="R342" t-value="False"/>
+                    <t t-set="R333" t-value="False"/>
+                    <t t-set="R343" t-value="False"/>
+                    <t t-set="R33" t-value="False"/>
+                    <t t-set="R34" t-value="False"/>
+                    <t t-set="R35" t-value="False"/>
+                    <t t-set="R36" t-value="False"/>
+                    <t t-set="untaxed" t-value="0"/>
+                    <t t-set="tax" t-value="0"/>
+                    <t t-set="retencion" t-value="0"/>
+                    <t t-set="retencion_three" t-value="0"/>
+                    <t t-set="total" t-value="0"/>
+                    <t t-set="prorratas" t-value="0"/>
+                    <t t-set="porc_prorrata" t-value="0"/>
+                    <div class="row" style="width:100%; margin-left: 70px">
+                        <div class="col-xs-4" style="width:40%;">
+                            <strong>Journals:</strong>
+                            <p t-esc="', '.join([ lt or '' for lt in print_journal ])"/>
+                        </div>
+                        <div class="col-xs-4" style="width:30%;">
+                            <strong>Display Account</strong>
+                            <p>
+                                <span t-if="data['display_account'] == 'all'">All accounts'</span>
+                                <span t-if="data['display_account'] == 'movement'">With movements</span>
+                                <span t-if="data['display_account'] == 'not_zero'">With balance not equal to zero</span>
+                            </p>
+                        </div>
+                        <div class="col-xs-4" style="width:30%;">
+                            <strong>Target Moves:</strong>
+                            <p t-if="data['target_move'] == 'all'">All Entries</p>
+                            <p t-if="data['target_move'] == 'posted'">All Posted Entries</p>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row" style="width:100%; margin-left: 70px">
+                        <div style="width:40%;">
+                            <strong>Sorted By:</strong>
+                            <p t-if="data['sortby'] == 'sort_date'">Date</p>
+                            <p t-if="data['sortby'] == 'sort_journal_partner'">Journal and Partner</p>
+                        </div>
+                        <div style="width:30%;"></div>
+                        <div style="width:30%;">
+                            <t t-if="data['date_from']">
+                                <strong>Date from :</strong>
+                                <span t-esc="data['date_from']"/>
+                                <br/>
+                            </t>
+                            <t t-if="data['date_to']">
+                                <strong>Date to :</strong>
+                                <span t-esc="data['date_to']"/>
+                            </t>
+                        </div>
+                    </div>
+                    <br/>
+<!--                    Tabla principal-->
+                                <table class="tableizer-table">
+                                <thead>
+                                <tr>
+                                    <th colspan="14" style="background: transparent;border-style: none ;"></th>
+                                    <th colspan="3" style="text-align:center;border: 1px solid #000; font-size:10px">COMPRAS INTERNAS O IMPORTACIONES</th>
+<!--                                    <th colspan="1" style="background: transparent; border: none"></th>-->
+                                </tr>
+                                <tr >
+                                    <th>Oper. N°</th>
+                                    <th>Fecha de la Factura</th>
+                                    <th>RIF</th>
+                                    <th>Nombre o Razón Social</th>
+                                    <th>Tipo de Proveed.</th>
+                                    <th>Número de Comprobt.</th>
+<!--                                    <th>Núm. Planilla de Importación (C-80 o C-81)</th>-->
+<!--                                    <th>Núm. de Expediente Importación</th>-->
+                                    <th>Número de Factura.</th>
+                                    <th>Núm. Ctrol. de Factura</th>
+                                    <th>Número Nota Debit.</th>
+                                    <th>Número de Nota Crdto.</th>
+                                    <th>Tipo de Transacc.</th>
+                                    <th>Número de Factura Afectada</th>
+                                    <th>Total Compras Incluyendo el IVA</th>
+                                    <th>Compras sin derecho a Crédito IVA</th>
+                                    <th>Base Imponible</th>
+                                    <th>% Alícuota</th>
+                                    <th>Impuesto IVA</th>
+                                    <th>IVA Retenido (al vendedor)</th>
+                                    <th>IVA Retenido (a terceros)</th>
+                                    <th>Prorrata</th>
+<!--                                    <th>Anticipo de IVA (importación)</th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+
+<!--                            Esta parte usa el objeto account.wh.iva, -->
+<!--                                <tr>-->
+<!--                                <t t-set="count" t-value="0"/>-->
+<!--                                <t t-set="ducs" t-value="docs.filtered(lambda doc: doc.wh_lines.invoice_id.transaction_type != '04-ajuste')"/>-->
+<!--                                <t t-foreach="ducs" t-as="o">-->
+<!--                                <t t-set="count" t-value="count+1"/>-->
+<!--                                    <t t-if="o.state !='annulled'">-->
+<!--                                    <tr>-->
+<!--                                    <td><t t-esc="count"/></td>-->
+<!--                                    <td><span t-esc="o.wh_lines.invoice_id.date"/></td>-->
+<!--                                    <td><span t-esc="o.partner_id.rif"/></td>-->
+<!--                                    <td><span t-esc="o.partner_id.name"/></td>-->
+<!--                                    <td><span t-esc="o.partner_id.residence_type"/></td>-->
+<!--                                    <td><span t-esc="o.customer_doc_number"/></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+<!--                                    <td><span t-esc="o.wh_lines.invoice_id.vendor_invoice_number"/></td>-->
+<!--                                    <td><span t-esc="o.wh_lines.invoice_id.control_invoice_number"/></td>-->
+<!--                                    <td><span t-esc="hola"/>0</td>-->
+<!--                                    <td>0</td>-->
+<!--                                    <td><span t-esc="o.wh_lines.invoice_id.transaction_type"/></td>-->
+<!--                                    <td><span t-esc="hola"/></td>-->
+<!--                                    <td><span t-esc="sum(o.mapped('wh_lines.invoice_id.amount_total'))" t-options="{'widget': 'monetary', 'display_currency': o.currency_id, 'from_currency': o.currency_id}"/></td>-->
+<!--                                    <td><span t-esc="sum(o.wh_lines.filtered(lambda whl: whl.amount_tax == 0).mapped('base_tax'))" t-options="{'widget': 'monetary', 'display_currency': o.currency_id, 'from_currency': o.currency_id}"/></td>-->
+<!--                                    <td><span t-esc="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').mapped('base_tax'))" t-options="{'widget': 'monetary', 'display_currency': o.currency_id, 'from_currency': o.currency_id}"/></td>-->
+<!--                                    <t t-if="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').ret_tax.mapped('amount')) &lt; 16" t-set="R333" t-value="R333 + sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').mapped('base_tax'))"/>-->
+<!--                                    <t t-if="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').ret_tax.mapped('amount')) == 16" t-set="R33" t-value="R33 + sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').mapped('base_tax'))"/>-->
+<!--                                    <t t-if="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').ret_tax.mapped('amount')) &gt; 16" t-set="R332" t-value="R332 + sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').mapped('base_tax'))"/>-->
+<!--                                    <td><span t-esc="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').ret_tax.mapped('amount'))"/>%</td>-->
+<!--                                    <td><span t-esc="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').mapped('amount_tax'))" t-options="{'widget': 'monetary', 'display_currency': o.currency_id, 'from_currency': o.currency_id}"/></td>-->
+<!--                                    <t t-if="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').ret_tax.mapped('amount')) == 16" t-set="R34" t-value="R34 + sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').mapped('amount_tax'))"/>-->
+<!--                                    <t t-if="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').ret_tax.mapped('amount')) &gt; 16" t-set="R342" t-value="R342 + sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').mapped('amount_tax'))"/>-->
+<!--                                    <t t-if="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').ret_tax.mapped('amount')) &lt; 16" t-set="R343" t-value="R343 + sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').mapped('amount_tax'))"/>-->
+<!--                                    <td><span t-esc="sum(o.wh_lines.filtered(lambda whl: whl.state != 'annulled').mapped('ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': o.currency_id, 'from_currency': o.currency_id}"/></td>-->
+<!--                                    <td>0</td>-->
+<!--                                    <td>0</td>-->
+<!--                                    </tr>-->
+<!--                                    </t>-->
+<!--                                </t>-->
+<!--                                </tr>-->
+
+<!--                             Esta parte usa el objeto account.move -->
+                                <tr>
+                                <t t-set="count" t-value="0"/>
+                                <t t-set="fac" t-value="fact.filtered(lambda doc: doc.transaction_type != '04-ajuste')"/>
+                                <t t-foreach="fac" t-as="u">
+                                <t t-set="count" t-value="count+1"/>
+                                    <t t-if="u.state !='annulled'">
+                                    <tr>
+                                    <td><t t-esc="count"/></td>
+                                    <td><span t-esc="u.date"/></td>
+                                    <td><span t-esc="u.partner_id.rif"/></td>
+                                    <td><span t-esc="u.partner_id.name"/></td>
+                                    <td><span t-esc="u.partner_id.residence_type"/></td>
+                                    <td><span t-esc="u.name"/></td>
+<!--                                    <td></td>-->
+<!--                                    <td></td>-->
+                                    <td><t t-if="u.type == 'in_invoice' and not u.debit_origin_id and not u.debit_origin_id"><span t-esc="u.vendor_invoice_number"/></t></td>
+                                    <td><span t-esc="u.control_invoice_number"/></td>
+                                    <td><span t-esc="u.vendor_invoice_number if u.debit_origin_id else '-'"/></td>
+                                    <td><span t-esc="u.vendor_invoice_number if u.type == 'in_refund' else '-'"/></td>
+                                    <td><span t-esc="u.transaction_type"/></td>
+                                    <td><span t-esc="u.mapped('reversed_entry_id').name if u.type == 'in_refund' else '-'"/></td>
+                                    <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="sum(u.mapped('amount_total'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                                    <t t-set="total" t-if="u.type == 'in_invoice'" t-value="total + sum(u.mapped('amount_total'))"/>
+                                    <t t-set="total" t-if="u.type == 'in_refund'" t-value="total - sum(u.mapped('amount_total'))"/>
+                                    <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="sum(u.invoice_line_ids.filtered(lambda whl: not whl.tax_ids).mapped('price_subtotal'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                                    <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="sum(u.invoice_line_ids.filtered(lambda whl: whl.tax_ids).mapped('price_subtotal'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                                    <t t-set="untaxed" t-if="u.type == 'in_invoice'" t-value="untaxed + sum(u.invoice_line_ids.filtered(lambda whl: whl.tax_ids).mapped('price_subtotal'))"/>
+                                    <t t-set="untaxed" t-if="u.type == 'in_refund'" t-value="untaxed - sum(u.invoice_line_ids.filtered(lambda whl: whl.tax_ids).mapped('price_subtotal'))"/>
+                                    <t t-if="len(u.invoice_line_ids.filtered(lambda line: len(line.mapped('tax_ids').filtered(lambda tax: tax.aliquot_type == 'reduced'))))" t-set="R333" t-value="R333 + sum(u.invoice_line_ids.filtered(lambda line: len(line.mapped('tax_ids').filtered(lambda tax: tax.aliquot_type == 'reduced'))).mapped('price_subtotal'))"/>
+                                    <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) == 16" t-set="R33" t-value="R33 + sum(u.invoice_line_ids.filtered(lambda whl: whl.tax_ids).mapped('price_subtotal'))"/>
+                                    <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) &gt; 16" t-set="R332" t-value="R332 + sum(u.invoice_line_ids.filtered(lambda whl: whl.tax_ids).mapped('price_subtotal'))"/>
+                                    <td><span t-esc="sum(u.invoice_line_ids.mapped('tax_ids.amount'))"/>%</td>
+                                    <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="u.amount_tax" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                                    <t t-set="tax" t-if="u.type == 'in_invoice'" t-value="tax + u.amount_tax"/>
+                                    <t t-set="tax" t-if="u.type == 'in_refund'" t-value="tax - u.amount_tax"/>
+                                    <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) == 16" t-set="R34" t-value="R34 + u.amount_tax"/>
+                                    <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) &gt; 16" t-set="R342" t-value="R342 + u.amount_tax"/>
+                                    <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) &lt; 16" t-set="R343" t-value="R343 + u.amount_tax"/>
+                                    <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="u.amount_wh_iva - sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                                    <t t-set="retencion" t-if="u.type == 'in_invoice'" t-value="retencion + u.amount_wh_iva - sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))"/>
+                                    <t t-set="retencion" t-if="u.type == 'in_refund'" t-value="retencion - u.amount_wh_iva + sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))"/>
+                                    <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                                    <t t-set="retencion_three" t-if="u.type == 'in_invoice'" t-value="retencion_three + sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))"/>
+                                    <t t-set="retencion_three" t-if="u.type == 'in_refund'" t-value="retencion_three - sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))"/>
+                                    <t t-if="sum(u.invoice_line_ids.filtered(lambda whl: sum(whl.tax_ids.mapped('amount')) &gt; 0).mapped('price_subtotal'))" t-set="porc_prorrata" t-value="sum(u.invoice_line_ids.filtered(lambda whl: sum(whl.tax_ids.mapped('amount')) == 0 and whl.tax_ids).mapped('price_subtotal')) / sum(u.invoice_line_ids.filtered(lambda whl: sum(whl.tax_ids.mapped('amount')) &gt; 0).mapped('price_subtotal'))"/>
+                                    <t t-set="prorrata" t-value="porc_prorrata*u.amount_tax"/>
+                                    <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="prorrata" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></td>
+                                    <t t-if="u.type == 'in_refund'" t-set="prorratas" t-value="prorratas - prorrata"/><t t-else="" t-set="prorratas" t-value="prorratas + prorrata"/>
+                                        <!--                                    <td>0</td>-->
+                                    </tr>
+                                    </t>
+                                </t>
+                                </tr>
+                                <tr class="total">
+                                    <td colspan="12"></td>
+                                    <th><span t-esc="total" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                    <th><span t-esc="sum(fac.filtered(lambda inv: inv.type == 'in_invoice').invoice_line_ids.filtered(lambda whl: not whl.tax_ids).mapped('price_subtotal')) - sum(fac.filtered(lambda inv: inv.type == 'in_refund').invoice_line_ids.filtered(lambda whl: not whl.tax_ids).mapped('price_subtotal'))" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                    <t t-set="R30" t-value="sum(fac.filtered(lambda inv: inv.type == 'in_invoice').invoice_line_ids.filtered(lambda whl: not whl.tax_ids).mapped('price_subtotal')) - sum(fac.filtered(lambda inv: inv.type == 'in_refund').invoice_line_ids.filtered(lambda whl: not whl.tax_ids).mapped('price_subtotal'))"/>
+                                    <th><span t-esc="untaxed" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                    <t t-set="R33" t-value="untaxed"/>
+                                    <th></th>
+                                    <th><span t-esc="tax" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                    <t t-set="R34" t-value="tax"/>
+                                    <th><span t-esc="retencion" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                    <th><span t-esc="retencion_three" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                                    <th><span t-esc="prorratas" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+<!--                                    <td></td>-->
+                                </tr>
+                            </tbody>
+<!--                                    Se definen las variables dependientes de otras-->
+                                <t t-set="R35" t-value="R30+R332+R333+R33+R312+R313"/>
+                                <t t-set="R36" t-value="R34+R342+R343+R32+R322+R323"/>
+                                <t t-set="R34" t-value="R34-R32"/>
+                                <t t-set="R342" t-value="R342-R322"/>
+                                <t t-set="R343" t-value="R343-R323"/>
+                            </table>
+                    <br/>
+<!--                    Tabla de los totales-->
+                        <div class="col-xs-4" align="right">
+                            <table class="table-condensed tableizer-table">
+                                <thead>
+                                    <tr>
+                                    <th/>
+                                    <th/>
+                                    <th>Base imponible</th>
+                                    <th/>
+                                    <th>Credito fiscal</th>
+<!--                                    <th style="border-style:none" width="50px"/>-->
+<!--                                    <th>IVA Retenido (a Terceros)</th>-->
+<!--                                    <th style="border:0px" width="150px"/>-->
+<!--                                    <th>Anticipo IVA</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <t t-set="ducs" t-value="docs.filtered(lambda doc: doc.wh_lines.invoice_id.transaction_type != '04-ajuste')"/>
+                                    <tr>
+                                        <td>Total : Compras Excentas y/o sin derecho a crédito fiscal</td>
+                                        <td><strong>30</strong></td>
+                                        <td><t t-if="R30" t-esc="R30" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                        <td/>
+                                        <td>0,00</td>
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Compras Importación afectadas solo Alicuota General</td>
+                                        <td><strong>31</strong></td>
+                                        <td><t t-if="R31" t-esc="R31" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                        <td><strong>32</strong></td>
+                                        <td><t t-if="R32" t-esc="R32" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Compras Importación Afectas en Alicuota General + Adicional</td>
+                                        <td><strong>312</strong></td>
+                                        <td><t t-if="R312" t-esc="R312" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                        <td><strong>322</strong></td>
+                                        <td><t t-if="R322" t-esc="R322" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Compras Importación Afectas en Alicuota Reducida</td>
+                                        <td><strong>313</strong></td>
+                                        <td><t t-if="R313" t-esc="R313" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                        <td><strong>323</strong></td>
+                                        <td><t t-if="R323" t-esc="R323" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Compras Internas Afectas en Alicuota General + Adicional</td>
+                                        <td><strong>332</strong></td>
+                                        <td><t t-if="R332" t-esc="R332" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                        <td><strong>342</strong></td>
+                                        <td><t t-if="R342" t-esc="R342" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Compras Internas Afectas en Alicuota Reducida</td>
+                                        <td><strong>333</strong></td>
+                                        <td><t t-if="R333" t-esc="R333" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                        <td><strong>343</strong></td>
+                                        <td><t t-if="R343" t-esc="R343" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Compras Internas Afectas solo Alicuota General</td>
+                                        <td><strong>33</strong></td>
+                                        <td><t t-if="R33" t-esc="R33" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+                                        <td><strong>34</strong></td>
+                                        <td><t t-if="R34" t-esc="R34" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="">0,00</t></td>
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+                                    </tr>
+                                    <tr class="total">
+                                        <th><strong>Total</strong></th>
+                                        <th><strong>35</strong></th>
+                                        <th><t t-if="R35" t-esc="R35" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="" t-esc="0,00"/></th>
+                                        <th><strong>36</strong></th>
+                                        <th><t t-if="R36" t-esc="R36" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/><t t-else="" t-esc="0,00"/></th>
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+<!--                                        <td/>-->
+<!--                                        <td></td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    <br/>
+
+<!--                    Tabla de ajustes-->
+                    <t t-set="untaxed_a" t-value="0"/>
+                    <t t-set="tax_a" t-value="0"/>
+                    <t t-set="retencion_a" t-value="0"/>
+                    <t t-set="retencion_three_a" t-value="0"/>
+                    <t t-set="prorratas_a" t-value="0"/>
+                    <t t-set="porc_prorrata_a" t-value="0"/>
+                    <t t-set="total_a" t-value="0"/>
+                    <table t-if="docs_fac_ajust" class="tableizer-table">
+                        <thead>
+                        <tr>
+                            <th colspan="14" style="background: transparent;border-style: none;text-align:left"><h3>Ajustes</h3></th>
+                            <th colspan="3" style="text-align:center;border: 1px solid #000; font-size:10px">COMPRAS INTERNAS O IMPORTACIONES</th>
+<!--                                    <th colspan="1" style="background: transparent; border: none"></th>-->
+                        </tr>
+                        <tr >
+                            <th>Oper. N°</th>
+                            <th>Fecha de la Factura</th>
+                            <th>RIF</th>
+                            <th>Nombre o Razón Social</th>
+                            <th>Tipo de Proveed.</th>
+                            <th>Número de Comprobt.</th>
+<!--                            <th>Núm. Planilla de Importación (C-80 o C-81)</th>-->
+<!--                            <th>Núm. de Expediente Importación</th>-->
+                            <th>Número de Factura.</th>
+                            <th>Núm. Ctrol. de Factura</th>
+                            <th>Número Nota Debit.</th>
+                            <th>Número de Nota Crdto.</th>
+                            <th>Tipo de Transacc.</th>
+                            <th>Número de Factura Afectada</th>
+                            <th>Total Compras Incluyendo el IVA</th>
+                            <th>Compras sin derecho a Crédito IVA</th>
+                            <th>Base Imponible</th>
+                            <th>% Alícuota</th>
+                            <th>Impuesto IVA</th>
+                            <th>IVA Retenido (al vendedor)</th>
+                            <th>IVA Retenido (a terceros)</th>
+                            <th>Prorrata</th>
+<!--                            <th>Anticipo de IVA (importación)</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <t t-set="count" t-value="0"/>
+                        <t t-set="fas" t-value="docs_fac_ajust"/>
+                        <t t-foreach="fas" t-as="u">
+                        <t t-set="count" t-value="count+1"/>
+                        <t t-if="u.state !='annulled'">
+                        <tr>
+                            <td>A<t t-esc="count"/></td>
+                            <td><span t-esc="u.date"/></td>
+                            <td><span t-esc="u.partner_id.rif"/></td>
+                            <td><span t-esc="u.partner_id.name"/></td>
+                            <td><span t-esc="u.partner_id.residence_type"/></td>
+                            <td><span t-esc="u.name"/></td>
+<!--                            <td></td>-->
+<!--                            <td></td>-->
+                            <td><span t-esc="u.vendor_invoice_number"/></td>
+                            <td><span t-esc="u.control_invoice_number"/></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span t-esc="u.transaction_type"/></td>
+                            <td><span t-esc="hola"/></td>
+                            <td><span t-esc="sum(u.mapped('amount_total'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                            <t t-set="total_a" t-value="total_a + sum(u.mapped('amount_total'))"/>
+                            <td><span t-esc="sum(u.invoice_line_ids.filtered(lambda whl: not whl.tax_ids).mapped('price_subtotal'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                            <td><span t-esc="sum(u.invoice_line_ids.filtered(lambda whl: not whl.tax_ids).mapped('price_subtotal'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                            <t t-set="untaxed_a" t-value="untaxed_a + sum(u.invoice_line_ids.filtered(lambda whl: whl.tax_ids).mapped('price_subtotal'))"/>
+                            <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) &lt; 16" t-set="R333" t-value="R333 + sum(u.invoice_line_ids.filtered(lambda whl: whl.tax_ids).mapped('price_subtotal'))"/>
+                            <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) == 16" t-set="R33" t-value="R33 + sum(u.invoice_line_ids.filtered(lambda whl: whl.tax_ids).mapped('price_subtotal'))"/>
+                            <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) &gt; 16" t-set="R332" t-value="R332 + sum(u.invoice_line_ids.filtered(lambda whl: whl.tax_ids).mapped('price_subtotal'))"/>
+                            <td><span t-esc="sum(u.invoice_line_ids.mapped('tax_ids.amount'))"/>%</td>
+                            <td><span t-esc="u.amount_tax" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                            <t t-set="tax_a" t-value="tax_a + u.amount_tax"/>
+                            <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) == 16" t-set="R34" t-value="R34 + u.amount_tax"/>
+                            <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) &gt; 16" t-set="R342" t-value="R342 + u.amount_tax"/>
+                            <t t-if="sum(u.invoice_line_ids.mapped('tax_ids.amount')) &lt; 16" t-set="R343" t-value="R343 + u.amount_tax"/>
+                            <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="u.amount_wh_iva - sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                            <t t-set="retencion_a" t-value="retencion_a + u.amount_wh_iva"/>
+                            <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))" t-options="{'widget': 'monetary', 'display_currency': u.currency_id, 'from_currency': u.currency_id}"/></td>
+                            <t t-set="retencion_three_a" t-if="u.type == 'in_invoice'" t-value="retencion_three_a + sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))"/>
+                            <t t-set="retencion_three_a" t-if="u.type == 'in_refund'" t-value="retencion_three_a - sum(u.wh_id.wh_lines.filtered(lambda whl: whl.payments_three).mapped('ret_amount'))"/>
+                            <t t-if="sum(u.invoice_line_ids.filtered(lambda whl: sum(whl.tax_ids.mapped('amount')) &gt; 0).mapped('price_subtotal'))" t-set="porc_prorrata_a" t-value="sum(u.invoice_line_ids.filtered(lambda whl: sum(whl.tax_ids.mapped('amount')) == 0 and whl.tax_ids).mapped('price_subtotal')) / sum(u.invoice_line_ids.filtered(lambda whl: sum(whl.tax_ids.mapped('amount')) &gt; 0).mapped('price_subtotal'))"/>
+                            <t t-set="prorrata_a" t-value="porc_prorrata_a*u.amount_tax"/>
+                            <td><t t-if="u.type == 'in_refund'">-</t><span t-esc="prorrata_a" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></td>
+                            <t t-if="u.type == 'in_refund'" t-set="prorratas_a" t-value="prorratas_a - prorrata_a"/><t t-else="" t-set="prorratas_a" t-value="prorratas_a + prorrata_a"/>
+                            <!--                        <td>0</td>-->
+                            </tr>
+                            </t>
+                        </t>
+                        <tr class="total">
+                            <td colspan="12"></td>
+                            <th><span t-esc="total_a" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}" /></th>
+                            <th><span t-esc="sum(fas.invoice_line_ids.filtered(lambda whl: not whl.tax_ids).mapped('price_subtotal'))" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></th>
+                            <t t-set="R30" t-value="untaxed_a"/>
+                            <th><span t-esc="untaxed_a" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}" /></th>
+                            <th></th>
+                            <th><span t-esc="tax_a" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></th>
+                            <th><span t-esc="retencion_a" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></th>
+                            <th><span t-esc="retencion_three_a" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+                            <th><span t-esc="prorratas_a" t-options="{'widget': 'monetary', 'display_currency': fac.currency_id, 'from_currency': fac.currency_id}"/></th>
+<!--                            <td></td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div t-if="docs_fac_ajust" class="col-xs-4" align="center">
+                        <table class="tableizer-table">
+                            <tbody>
+                            <t t-set="fas" t-value="docs_fac_ajust"/>
+                            <tr>
+                                <th>Saldo anterior de Ajuste</th>
+                                <td><t t-esc="0.00" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></td>
+                                <td><t t-esc="0.00" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></td>
+                            </tr>
+                            <tr>
+                                <th>Ajustes de este periodo</th>
+                                <td><t t-esc="tax_a" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></td>
+                                <td><t t-esc="0.00" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></td>
+                            </tr>
+                            <tr>
+                                <th>Total Ajuste Aplicable</th>
+                                <td><t t-esc="0.00" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></td>
+                                <td><t t-esc="0.00" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></td>
+                            </tr>
+                            <tr>
+                                <th>Ajuste Aplicado</th>
+                                <td><t t-esc="0.00" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></td>
+                                <td><t t-esc="0.00" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></td>
+                            </tr>
+                            <tr height="10px"/>
+                            <tr>
+                                <th>Saldo de Ajuste próximo periodo</th>
+                                <th><t t-esc="0.00" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></th>
+                                <th><t t-esc="0.00" t-options="{'widget': 'monetary', 'display_currency': currency_id, 'from_currency': currency_id}"/></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+
+                </t>
+            </t>
+        </template>
+        
+        
+    </data>
+</odoo>

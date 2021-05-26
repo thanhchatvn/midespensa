@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_pos_session_form_inherit_hka" model="ir.ui.view">
+            <field name="name">pos.session.form.view.inherit_hka</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="print_z_report" class="oe_highlight" string="Z Report" type="object"/>
+                    <button name="print_x_report" class="oe_highlight" string="X Report" type="object"/>
+                    <button name="button" id="reports_z"  class="o_printer_reports_z" string="Ok Z Report"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
