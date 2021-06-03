@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="CustomerScreenWidget">
+        <div class='screen'>
+            <div class="searchbox" style="left:2px;right:unset">
+                <input placeholder="Search Products" />
+                <span class="search-clear"></span>
+            </div>
+            <t t-if="! (widget.options and widget.options.product)">
+                <div class='order-empty' style="margin-top: 104px;color: gray;">
+                    <i class='fa fa-barcode' style="font-size: 120px;"/>
+                    <h1>Scan your barcode</h1>
+                </div>
+            </t>
+
+            <t t-if="widget.options and widget.options.product">
+                <div style="margin-top: 128px;">
+                    <img  t-attf-src="/web/image/product.product/#{widget.options.product.id}/image_1024" style="height:200px"></img>
+                    <div style="font-size: 30px;"><t t-esc="widget.options.product.display_name"/></div>
+                    <div style="font-size: 24px;">
+                        <t t-if="!widget.options.product.to_weight">
+                            <span class="price-tag">
+                                <t t-esc="widget.format_currency(widget.options.product.lst_price,'Product Price')"/>
+                            </span>
+                        </t>
+                        <t t-if="widget.options.product.to_weight">
+                            <span class="price-tag">
+                                <t t-esc="widget.format_currency(widget.options.product.lst_price,'Product Price')+'/'+widget.pos.units_by_id[widget.options.product.uom_id[0]].name"/>
+                            </span>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

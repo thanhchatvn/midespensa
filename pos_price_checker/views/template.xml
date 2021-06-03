@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets1" inherit_id="point_of_sale.assets">
+          <xpath expr="." position="inside">
+				<link rel="stylesheet" href="/pos_price_checker/static/src/js/jquery-ui.css" />
+              	<script type="text/javascript" src="/pos_price_checker/static/src/js/pos.js"></script>
+              	<link rel="stylesheet" type="text/css" href="/pos_price_checker/static/src/css/pos.css"/>
+          </xpath>
+        </template>
+    </data>
+</odoo>
