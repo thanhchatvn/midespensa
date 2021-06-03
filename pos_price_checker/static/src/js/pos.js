@@ -66,6 +66,12 @@ odoo.define('pos_price_checker', function (require) {
                     $(".searchbox input").keydown();
                     event.stopPropagation();
                 });
+                gui.define_screen({
+                    'name': 'customer_screen', 
+                    'widget': CustomerScreenWidget,
+                });
+            }else{
+                $('.price-checker').remove()
             }
 	    },
         show: function(options){
@@ -77,12 +83,11 @@ odoo.define('pos_price_checker', function (require) {
         close: function() {
             var self = this;
         },
-
     });
-    gui.define_screen({
-        'name': 'customer_screen', 
-        'widget': CustomerScreenWidget,
-    });
+    // gui.define_screen({
+    //     'name': 'customer_screen', 
+    //     'widget': CustomerScreenWidget,
+    // });
     var total_ids12 = []
     chrome.Chrome.include({
         build_widgets: function() {

@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
 
     <t t-name="CustomerScreenWidget">
-        <div class='screen'>
+        <div class='screen price-checker'>
             <div class="searchbox" style="left:2px;right:unset">
                 <input placeholder="Search Products" />
                 <span class="search-clear"></span>
