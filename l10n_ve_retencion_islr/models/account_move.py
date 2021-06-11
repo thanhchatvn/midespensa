@@ -7,6 +7,39 @@ from odoo.addons import decimal_precision as dp
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
+    amount_residual = fields.Monetary(string='Amount Due', store=True,
+                                      compute='_compute_amount')
+
+    def _compute_amount(self):
+        super(AccountMove, self)._compute_amount()
+        if self.withholding_id:
+            for move in self:
+                new_total_residual = 0.0
+                residual_currency = 0.0
+                total_residual = 0.0
+                total_residual_currency = 0.0
+                currencies = set()
+                for line in move.line_ids:
+                    if line.currency_id:
+                        currencies.add(line.currency_id)
+
+                    if line.account_id.user_type_id.type in ('receivable', 'payable'):
+                        total_residual += line.amount_residual
+                        total_residual_currency += line.amount_residual_currency
+                        residual_currency += move.amount_wh_islr if total_residual_currency < 0 else -move.amount_wh_islr
+                        total_residual_currency = residual_currency
+
+                    if move.type == 'entry' or move.is_outbound():
+                        sign = 1
+                    else:
+                        sign = -1
+                if len(currencies) == 1:
+                    move.amount_residual += -sign * total_residual_currency
+                else:
+                    continue
+            else:
+                pass
+
     @api.depends('invoice_line_ids.price_subtotal', 'withholding_id.amount_total', 'withholding_id.withholding_line')
     def _compute_wh_islr(self):
         amount_iva = 0.0
@@ -130,6 +163,7 @@ class AccountMove(models.Model):
     #Crea la retencion
     def create_retentions(self):
         lines = []
+        retention_bs = 0
         valss_retention = {}
         if self.type == 'in_invoice':
             for line in self.invoice_line_ids:
@@ -144,19 +178,34 @@ class AccountMove(models.Model):
                         'context': {'default_warning': _('No se encontraron valores para la generación de retención de ISLR. Debera generarla de forma manual')},
                         'target':'new'
                     }
-                amount_base = float(line.debit * wh_table_retention_line.percentage_amount_base/100)
-                print (amount_base)
+                if wh_table_retention_line.rate2:
+                    ut = line.company_id.tax_unit
+                    base = float(line.debit) if line.move_id.currency_id else float(line.move_id.amount_untaxed)
+                    # amount_base = float(line.debit * wh_table_retention_line.percentage_amount_base / 100)
+                    amount_base = float(base * wh_table_retention_line.percentage_amount_base / 100)
+                    unit_amount_base = amount_base / ut
+                    rate2_ids = wh_table_retention_line.table_id.rate2_ids.search([('lower_limit', '<=', unit_amount_base),
+                                                                                   '|',
+                                                                                   ('upper_limit', '>=', unit_amount_base),
+                                                                                   ('upper_limit', '=', 0)])
+                    result_a = float(unit_amount_base * rate2_ids.percentage / 100)
+                    retention_ut = float(result_a - rate2_ids.subtracting)
+                    retention_no_bs = float(retention_ut * ut)
+                    # retention_bs = float(retention_ut * ut)
+                    retention_bs = line.move_id.company_id.currency_id._convert(retention_no_bs, line.move_id.currency_id,
+                                                          line.move_id.company_id, line.move_id.date) if line.move_id.currency_id else float(retention_ut * ut)
+                # amount_base = float(line.debit * wh_table_retention_line.percentage_amount_base/100)
+                amount_base = float(line.move_id.amount_untaxed * wh_table_retention_line.percentage_amount_base/100)
                 ret_amount = float(amount_base * wh_table_retention_line.percentage/100)
-                print (ret_amount)
-                lines.append([0, False, {
-                    'invoice_id': self.id,  # factura
-                    'amount_invoice': amount_base,
-                    'base_tax': self.amount_untaxed,
-                    'porc_islr': wh_table_retention_line.percentage,
-                    'code_withholding_islr': wh_table_retention_line.code,
-                    'descripcion': wh_table_retention_line.concept.name,
-                    'ret_amount': ret_amount
-                }])
+            lines.append([0, False, {
+                'invoice_id': self.id,  # factura
+                'amount_invoice': self.amount_total,
+                'base_tax': self.amount_untaxed,
+                'porc_islr': wh_table_retention_line.percentage,
+                'code_withholding_islr': wh_table_retention_line.code,
+                'descripcion': wh_table_retention_line.concept.name,
+                'ret_amount': ret_amount if not wh_table_retention_line.rate2 else retention_bs
+            }])
             valss_retention = {
                 'name': self.name,
                 'partner_id': self.partner_id.id,
@@ -171,18 +220,16 @@ class AccountMove(models.Model):
             for line in self.invoice_line_ids:
                 wh_table_retention_line = line.get_islr_retentions_dates()
                 amount_base = float(line.credit * wh_table_retention_line.percentage_amount_base / 100)
-                print(amount_base)
                 ret_amount = float(amount_base * wh_table_retention_line.percentage / 100)
-                print(ret_amount)
-                lines.append([0, False, {
-                    'invoice_id': self.id,  # factura
-                    'amount_invoice': amount_base,
-                    'base_tax': self.amount_untaxed,
-                    'porc_islr': wh_table_retention_line.percentage,
-                    'code_withholding_islr': wh_table_retention_line.code,
-                    'descripcion': wh_table_retention_line.concept.name,
-                    'ret_amount': ret_amount
-                }])
+            lines.append([0, False, {
+                'invoice_id': self.id,  # factura
+                'amount_invoice': self.amount_total,
+                'base_tax': self.amount_untaxed,
+                'porc_islr': wh_table_retention_line.percentage,
+                'code_withholding_islr': wh_table_retention_line.code,
+                'descripcion': wh_table_retention_line.concept.name,
+                'ret_amount': ret_amount
+            }])
             valss_retention = {
                 'name': self.name,
                 'partner_id': self.partner_id.id,
@@ -206,18 +253,16 @@ class AccountMove(models.Model):
                 #         'target':'new'
                 #     }
                 amount_base = float(line.debit * wh_table_retention_line.percentage_amount_base / 100)
-                print(amount_base)
                 ret_amount = float(amount_base * wh_table_retention_line.percentage / 100)
-                print(ret_amount)
-                lines.append([0, False, {
-                    'invoice_id': self.id,  # factura
-                    'amount_invoice': amount_base,
-                    'base_tax': self.amount_untaxed,
-                    'porc_islr': wh_table_retention_line.percentage,
-                    'code_withholding_islr': wh_table_retention_line.code,
-                    'descripcion': wh_table_retention_line.concept.name,
-                    'ret_amount': ret_amount
-                }])
+            lines.append([0, False, {
+                'invoice_id': self.id,  # factura
+                'amount_invoice': self.amount_total,
+                'base_tax': self.amount_untaxed,
+                'porc_islr': wh_table_retention_line.percentage,
+                'code_withholding_islr': wh_table_retention_line.code,
+                'descripcion': wh_table_retention_line.concept.name,
+                'ret_amount': ret_amount
+            }])
             valss_retention = {
                 'name': self.name,
                 'partner_id': self.partner_id.id,
@@ -240,23 +285,36 @@ class AccountMove(models.Model):
                         'context': {'default_warning': _('No se encontraron valores para la generación de retención de ISLR. Debera generarla de forma manual')},
                         'target':'new'
                     }
-                amount_base = float(line.credit * wh_table_retention_line.percentage_amount_base / 100)
-                # amount_base = 12000000
-                print('Amount_base')
-                print('Amount_base')
-                print('Amount_base')
-                print(amount_base)
+                if wh_table_retention_line.rate2:
+                    ut = line.company_id.tax_unit
+                    base = float(line.credit) if line.move_id.currency_id else float(line.move_id.amount_untaxed)
+                    amount_base = float(base * wh_table_retention_line.percentage_amount_base / 100)
+                    unit_amount_base = amount_base / ut
+                    rate2_ids = wh_table_retention_line.table_id.rate2_ids.search(
+                        [('lower_limit', '<=', unit_amount_base),
+                         '|',
+                         ('upper_limit', '>=', unit_amount_base),
+                         ('upper_limit', '=', 0)])
+                    result_a = float(unit_amount_base * rate2_ids.percentage / 100)
+                    retention_ut = float(result_a - rate2_ids.subtracting)
+                    retention_no_bs = float(retention_ut * ut)
+                    # retention_bs = float(retention_ut * ut)
+                    retention_bs = line.move_id.company_id.currency_id._convert(retention_no_bs,
+                                                                                line.move_id.currency_id,
+                                                                                line.move_id.company_id,
+                                                                                line.move_id.date) if line.move_id.currency_id else float(
+                        retention_ut * ut)
+                amount_base = float(line.move_id.amount_untaxed * wh_table_retention_line.percentage_amount_base / 100)
                 ret_amount = float(amount_base * wh_table_retention_line.percentage / 100)
-                print(ret_amount)
-                lines.append([0, False, {
-                    'invoice_id': self.id,  # factura
-                    'amount_invoice': amount_base,
-                    'base_tax': self.amount_untaxed,
-                    'porc_islr': wh_table_retention_line.percentage,
-                    'code_withholding_islr': wh_table_retention_line.code,
-                    'descripcion': wh_table_retention_line.concept.name,
-                    'ret_amount': ret_amount
-                }])
+            lines.append([0, False, {
+                'invoice_id': self.id,  # factura
+                'amount_invoice': self.amount_total,
+                'base_tax': self.amount_untaxed,
+                'porc_islr': wh_table_retention_line.percentage,
+                'code_withholding_islr': wh_table_retention_line.code,
+                'descripcion': wh_table_retention_line.concept.name,
+                'ret_amount': ret_amount if not wh_table_retention_line.rate2 else retention_bs
+            }])
             valss_retention = {
                 'name': self.name,
                 'partner_id': self.partner_id.id,
@@ -307,6 +365,7 @@ class AccountMove(models.Model):
             :return:
         '''
         for inv in self:
+            lines_retent = inv.env['account.move.line']
             if inv.type in ('in_invoice','in_refund'):
                 lines_retent = inv.env['account.move.line'].search(
                     [('account_id', '=', self.company_id.purchase_islr_ret_account_id.id),
@@ -390,26 +449,17 @@ class AccountMoveLine(models.Model):
         current_year = fields.Date.context_today(self).year
         # prueba = self.env['account.withholding.rate.table.line'].search([('percentage_amount_base','=',id)])
         if self.move_id.type in ['in_invoice','in_refund']:
-            wh_rate_table_line = self.env['account.withholding.rate.table.line'].search([('table_id.year','=',current_year),
-                                                                                             ('concept','=',self.product_id.service_concept_retention.id),
-                                                                                             ('residence_type','=',self.move_id.partner_id.residence_type),
-                                                                                             ('company_type','=',self.move_id.partner_id.company_type),
-                                                                                             # ('percentage_amount_base', '=',prueba)
-                                                                                             ])
+            wh_rate_table_line = self.env['account.withholding.rate.table.line'].search([('concept', '=', self.product_id.service_concept_retention.id),
+                                                                                         ('person_type', '=', self.move_id.partner_id.person_type)
+                                                                                         ])
             # wh_rate_table_line = 'Prueba'
         elif self.move_id.type == 'out_invoice':
-            wh_rate_table_line = self.env['account.withholding.rate.table.line'].search(
-                                                                                        [('table_id.year', '=', current_year),
-                                                                                         ('concept', '=', self.product_id.service_concept_retention.id),
-                                                                                         ('residence_type', '=', 'D'),
-                                                                                         ('company_type', '=', 'company'),
-                                                                                         ])
+            wh_rate_table_line = self.env[('account.withholding.rate.table.line')].search([('concept', '=', self.product_id.service_concept_retention.id),
+                                                                                           ('person_type', '=', 'PJD')
+                                                                                           ])
         elif self.move_id.type == 'out_refund':
-            wh_rate_table_line = self.env['account.withholding.rate.table.line'].search(
-                                                                                        [('table_id.year', '=', current_year),
-                                                                                         ('concept', '=', self.product_id.service_concept_retention.id),
-                                                                                         ('residence_type', '=', 'D'),
-                                                                                         ('company_type', '=', 'company'),
+            wh_rate_table_line = self.env['account.withholding.rate.table.line'].search([('concept', '=', self.product_id.service_concept_retention.id),
+                                                                                         ('person_type', '=', 'PJD')
                                                                                          ])
         return wh_rate_table_line
 

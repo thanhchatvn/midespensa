@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="928b7203-ed32-4879-9390-594c1d2c419a" name="Default Changelist" comment="[ADD] Agregando modulo de multimoneda para el POS">
+    <list default="true" id="928b7203-ed32-4879-9390-594c1d2c419a" name="Default Changelist" comment="[IMP] Correcciones de localización y modulo de POS para multimoneda">
+      <change afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/rate.table.withholding.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bi_pos_multi_currency/models/pos_config_inherit.py" beforeDir="false" afterPath="$PROJECT_DIR$/bi_pos_multi_currency/models/pos_config_inherit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bi_pos_multi_currency/static/src/js/pos_data.js" beforeDir="false" afterPath="$PROJECT_DIR$/bi_pos_multi_currency/static/src/js/pos_data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_accountant/reports/report_sales_book.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_accountant/reports/report_sales_book.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_accountant/reports/report_shopping_book.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_accountant/reports/report_shopping_book.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_accountant/wizard/wizard_purchase_book_xslx.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_accountant/wizard/wizard_purchase_book_xslx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_accountant/wizard/wizard_sale_book_xslx.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_accountant/wizard/wizard_sale_book_xslx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/company.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/company.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/partner.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/partner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/company_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/company_view.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/partner_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/partner_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/__manifest__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/i18n/es.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/account_tax.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/company.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/invoice.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/partner.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/reports/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/reports/fiscal_invoice.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/reports/internal_layout_laws.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/security/ir.model.access.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/static/description/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/account_invoice_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/account_menu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/account_tax_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/company_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/partner_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/__manifest__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.concept.csv" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.concept.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.rate.table.csv" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.rate.table.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.rate.table.line.csv" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.rate.table.line.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/i18n/es.po" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/i18n/es.po" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/account_move.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/account_move.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/res_company_islr.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/res_company_islr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/res_config_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/res_config_settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr_rate_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr_rate_table.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/report_islr_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/report_islr_template.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/withholding_receipt_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/withholding_receipt_template.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_iva/models/wh_iva.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_iva/models/wh_iva.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_iva/report/wh_iva_receipt_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_iva/report/wh_iva_receipt_template.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/security/ir.model.access.csv" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/security/ir.model.access.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/security/ir_rule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/security/ir_rule.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/static/description/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/static/description/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/button_islr_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/button_islr_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/res_config_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/res_config_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/ret_product_islr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/ret_product_islr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/wh_islr_rate_table_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/wh_islr_rate_table_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/wh_islr_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/views/wh_islr_view.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +60,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/enterprise" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -68,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623398810371</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[IMP] Correcciones de localización y modulo de POS para multimoneda">
+      <created>1623410575788</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1623410575788</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -86,6 +122,7 @@
     <MESSAGE value="[IMP] Agregar cambios de corrección para product checker" />
     <MESSAGE value="[ADD] Agregando modulo de restricciones para el POS" />
     <MESSAGE value="[ADD] Agregando modulo de multimoneda para el POS" />
-    <option name="LAST_COMMIT_MESSAGE" value="[ADD] Agregando modulo de multimoneda para el POS" />
+    <MESSAGE value="[IMP] Correcciones de localización y modulo de POS para multimoneda" />
+    <option name="LAST_COMMIT_MESSAGE" value="[IMP] Correcciones de localización y modulo de POS para multimoneda" />
   </component>
 </project>

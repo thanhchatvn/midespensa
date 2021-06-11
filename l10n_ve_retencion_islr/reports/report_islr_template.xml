@@ -8,7 +8,7 @@
 				<thead>
 				  <tr>
 					<th style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; ">RIF agente:</th>
-					<th style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="docs[0].company_id.vat"/></th>
+					<th style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="docs[0].company_id.rif"/></th>
 					<th style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; ">Periodo:</th>
 					<th style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="docs[0].period"/></th>
 				  </tr>
@@ -32,7 +32,7 @@
 						<t t-set="iterador" t-value="1"/>
 						<tr t-foreach="o.withholding_line" t-as="l">
 							<td style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-esc="iterador"/></td>
-							<td style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="o.partner_id.vat"/></td>
+							<td style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="o.partner_id.rif"/></td>
 							<td style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.vendor_invoice_number"/></td>
 							<td style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.control_invoice_number"/></td>
 							<td style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="l.invoice_id.date_invoice"/></td>

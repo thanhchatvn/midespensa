@@ -13,6 +13,7 @@
         'data/account.withholding.concept.csv',
         'data/account.withholding.rate.table.csv',
         'data/account.withholding.rate.table.line.csv',
+        'data/rate.table.withholding.csv',
         'data/ir_sequence_data.xml',
         'wizard/payment_islr_wizard.xml',
         'wizard/message_warning.xml',
