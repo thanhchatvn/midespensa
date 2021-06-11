@@ -22,18 +22,4 @@ class ResCompany(models.Model):
     _inherit = 'res.company'
 
     #Columns
-    rif = fields.Char(string='RIF', required=True)
-
-    @api.constrains('rif')
-    def _check_rif(self):
-        formate = (r"[JG]{1}[-]{1}[0-9]{9}")
-        form_rif = re.compile(formate)
-        records = self.env['res.company']
-        rif_exist = records.search_count([('rif', '=', self.rif),('id', '!=', self.id)])
-        for company in self:
-            if not form_rif.match(company.rif):
-                raise ValidationError(("El formato del RIF es incorrecto por favor introduzca un RIF de la forma J-123456789 (utilice solo las letras J y G)"))
-            elif rif_exist > 0:
-                raise ValidationError(("Ya existe un registro con este RIF"))
-            else:
-                return True
+    vat = fields.Char(string='RIF', required=True)

@@ -24,7 +24,7 @@ class CurrencyInherit(models.Model):
 		for currency in self:
 			price = currency.rate
 			if company_currency.id != currency.id:
-				new_rate = (price)/company_currency.rate
+				new_rate = (price) * (company_currency.rate/currency.rate)
 				price = round(new_rate,6)
 			else:
 				price = 1

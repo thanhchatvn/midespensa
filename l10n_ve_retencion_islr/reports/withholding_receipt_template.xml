@@ -17,7 +17,7 @@
 									class="float-left" width="170px" alt="Company Logo"/><br/>
 -->
 									<span t-esc="doc.company_id.name"/><br/>
-									<span t-esc="doc.company_id.rif"/>
+									<span t-esc="doc.company_id.vat"/>
 								</strong>
 							</div>
 						</div>
@@ -71,7 +71,7 @@
 						</tr>
 						<tr>
 							<th class="text-left" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">N° DE RIF</th>
-							<td class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.company_id.rif"/></td>
+							<td class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.company_id.vat"/></td>
 						</tr>
 
 						<tr>
@@ -94,7 +94,7 @@
 						</tr>
 						<tr>
 							<th class="text-left" colspan="3" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; background-color:#D5D8DC ">N° DE RIF</th>
-							<td class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.partner_id.rif"/></td>
+							<td class="text-center" colspan="7" style="border: 1px !important; border-style: solid !important; border-color: #000000; color:#000000 !important; "><span t-field="doc.partner_id.vat"/></td>
 						</tr>
 						<tr>
 							<td class="espacio" style="border: 1px !important"><br></br></td>

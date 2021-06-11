@@ -220,7 +220,7 @@ var round_pr = utils.round_precision;
 				if(cur==currency[i].id)
 				{
 					for(var j=0;j<paymentlines.length;j++){
-						tot_amount = user_amt*self.pos.company_currency.rate/currency[i].rate;
+						tot_amount = user_amt*(currency[i].rate / self.pos.company_currency.rate);
 						paymentlines[j].amount =parseFloat(tot_amount.toFixed(2));
 						paymentlines[j].amount_currency =parseFloat(tot.toFixed(2)) ;
 						this.$('.show-payment').text(this.format_currency_no_symbol(paymentlines[j].amount));
