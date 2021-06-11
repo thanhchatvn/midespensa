@@ -266,7 +266,7 @@ class WizardShoppingBookXLSX(models.TransientModel):
             col += 1
             sheet.write(row, col, inv.date, report_format2)
             col += 1
-            sheet.write(row, col, inv.partner_id.rif or "-", report_format2)
+            sheet.write(row, col, inv.partner_id.vat or "-", report_format2)
             col += 1
             sheet.write(row, col, inv.partner_id.name, report_format2)
             col += 1
@@ -575,7 +575,7 @@ class WizardShoppingBookXLSX(models.TransientModel):
                 
                 sheet.write(row3, col3, inv.date, report_format2)
                 col3 += 1
-                sheet.write(row3, col3, inv.partner_id.rif or "-", report_format2)
+                sheet.write(row3, col3, inv.partner_id.vat or "-", report_format2)
                 col3 += 1
                 sheet.write(row3, col3, inv.partner_id.name, report_format2)
                 col3 += 1

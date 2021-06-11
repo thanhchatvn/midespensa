@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="928b7203-ed32-4879-9390-594c1d2c419a" name="Default Changelist" comment="[ADD] Agregando modulo de multimoneda para el POS">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bi_pos_multi_currency/models/pos_config_inherit.py" beforeDir="false" afterPath="$PROJECT_DIR$/bi_pos_multi_currency/models/pos_config_inherit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bi_pos_multi_currency/static/src/js/pos_data.js" beforeDir="false" afterPath="$PROJECT_DIR$/bi_pos_multi_currency/static/src/js/pos_data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_accountant/reports/report_sales_book.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_accountant/reports/report_sales_book.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_accountant/reports/report_shopping_book.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_accountant/reports/report_shopping_book.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_accountant/wizard/wizard_purchase_book_xslx.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_accountant/wizard/wizard_purchase_book_xslx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_accountant/wizard/wizard_sale_book_xslx.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_accountant/wizard/wizard_sale_book_xslx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/company.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/company.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/partner.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/partner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/company_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/company_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/partner_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/partner_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/report_islr_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/report_islr_template.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/withholding_receipt_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/withholding_receipt_template.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_iva/models/wh_iva.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_iva/models/wh_iva.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_iva/report/wh_iva_receipt_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_iva/report/wh_iva_receipt_template.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1tbCUVb63qqpQ3qIEZXixoU3i4o" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/enterprise" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="928b7203-ed32-4879-9390-594c1d2c419a" name="Default Changelist" comment="" />
+      <created>1623028418623</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1623028418623</updated>
+    </task>
+    <task id="LOCAL-00001" summary="[IMP] Agregar cambios de corrección para product checker">
+      <created>1623390359770</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1623390359770</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[ADD] Agregando modulo de restricciones para el POS">
+      <created>1623395793020</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1623395793020</updated>
+    </task>
+    <task id="LOCAL-00003" summary="[ADD] Agregando modulo de multimoneda para el POS">
+      <created>1623398810371</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1623398810371</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[IMP] Agregar cambios de corrección para product checker" />
+    <MESSAGE value="[ADD] Agregando modulo de restricciones para el POS" />
+    <MESSAGE value="[ADD] Agregando modulo de multimoneda para el POS" />
+    <option name="LAST_COMMIT_MESSAGE" value="[ADD] Agregando modulo de multimoneda para el POS" />
+  </component>
+</project>

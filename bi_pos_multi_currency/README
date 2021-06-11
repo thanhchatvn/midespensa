@@ -1,0 +1,9 @@
+
+13.0.0.1: (30-01-20)
+		- Update currency conversion with respect to pos currency.
+
+13.0.0.2: (05-02-20)
+		- Correct journal entries, add converted currency in return payment line.
+
+13.0.0.3: (26-02-20)
+		- Solve keyboard event handler issue.

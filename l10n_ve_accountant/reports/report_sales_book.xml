@@ -189,7 +189,7 @@
                                 <tr>
                                     <td><t t-esc="count"/></td>
                                     <td><span t-esc="s.date"/></td>
-                                    <td><span t-esc="s.partner_id.rif"/></td>
+                                    <td><span t-esc="s.partner_id.vat"/></td>
                                     <td><span t-esc="s.partner_id.name"/></td>
 <!--                                    <td><span t-esc="s.ref"/></td>-->
                                     <td><span t-esc="s.name"/></td>

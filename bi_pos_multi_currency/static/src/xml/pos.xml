@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<templates id="add_currency_conversation">
+		<t t-extend="PaymentScreenWidget">
+			<t t-jquery='h1' t-operation='append'>
+				<label class="switch">
+					<input type="checkbox" name="cur" id="cur"/>
+					<span class="slider round"></span>
+				</label>
+			</t>
+			<t t-jquery='.paymentlines-container' t-operation='before'>
+
+				<div id = "details" class="container" style="padding-top: 0; border-bottom: dashed 1px gainsboro; min-height: 154px;font-size: 15px;">
+					<div style=" display: inline-block; width: 50%; box-sizing: border-box; padding: 16px; text-align: left; float: left;">
+						<span class='label'><b><u>Select Currency</u></b></span><br/>
+						<div class="client-detail">
+							<br/>
+							<select class='drop-currency' name='id' id='cur' style="font-size : 15px; border-radius:5px;">
+								<option>select currency</option>
+								<t t-foreach='widget.pos.poscurrency' t-as='cur'>
+									<option t-att-value='cur.id'>
+										<t t-esc='cur.name'/>
+									</option>
+								</t>
+							</select>
+
+						</div>
+						<label class="container">Receipt in <span class="currency_name"/>
+							<input type="checkbox" id="Receipt" class="reciptclass" style="zoom:1.5;"/>
+						</label>
+						<br/>
+						<label class="container">Payment amount in <span class="currency_name" /> 
+							<input type="text" class="edit-amount" name="pos_amount" id="pos_amount"/>
+						</label>
+					</div>
+					<div style="display: inline-block; width: 50%; box-sizing: border-box; padding: 16px; padding-left: 0; float: right;font-size: 15px;">
+						<t t-if='widget.pos.config.curr_conv'>
+							<span class="label"><b><u>Currency Conversion</u></b></span>
+							<div style="border: 3px solid black; padding: 5px; padding: 5px;border-radius: 5px;margin-top: 14px;margin-bottom: 11px;">
+								<div>
+									<span class="label">1 <t t-esc='widget.pos.currency.name'/> =  </span><span class="currency_rate"/><span class="currency_name"/>
+								</div>
+								<div>
+									<span class= "label">Total Amount = </span><b><span class="currency_cal"/><span class="currency_symbol"/></b>
+								</div>
+							</div>
+						</t>
+						<div>
+							<button class='button-getamount' data-action="" style="border-radius:5px; font-size:15px; background-color: #43996E;color: white;">
+								Update Amount
+							</button>
+						</div>
+					</div>
+				</div>
+			</t>
+		</t>
+
+		<t t-extend="PaymentScreen-Paymentlines">
+			<t t-jquery='.paymentlines' t-operation='replace'>
+				<t t-if="paymentlines.length">
+				<table class='paymentlines'>
+					<colgroup>
+						<col class='due' />
+						<col class='tendered' />
+						<col class='change' />
+						<col class='method' />
+						<col class='controls' />
+					</colgroup>
+					<thead>
+						<tr class='label'>
+							<th>Due</th>
+							<th>payment</th>
+							<th>Change</th>
+							<th>Method</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<t t-foreach='paymentlines' t-as='line'>
+							<t t-if='line.selected'>
+								<tr class='paymentline selected'>
+									<td class='col-due'> <t t-esc='widget.format_currency_no_symbol(order.get_due(line))' /> </td>
+									<td class='col-tendered edit'> 
+										<t t-esc="line.amount" class="show-payment"/>
+									</td>
+									<t t-if='order.get_change(line)'>
+										<td class='col-change highlight' > 
+											<t t-esc='widget.format_currency_no_symbol(order.get_change(line))' />
+										</td>
+									</t>
+									<t t-if='!order.get_change(line)'>
+										<td class='col-change' ></td>
+									</t>
+										
+									<td class='col-name' > <t t-esc='line.name' /> </td>
+									<td class='delete-button' t-att-data-cid='line.cid'> <i class='fa fa-times-circle' /> </td>
+								</tr>
+							</t>
+							<t t-if='!line.selected'>
+								<tr class='paymentline' t-att-data-cid='line.cid'>
+									<td class='col-due'> <t t-esc='widget.format_currency_no_symbol(order.get_due(line))' /> </td>
+									<td class='col-tendered'> <t t-esc='widget.format_currency_no_symbol(line.get_amount())' /> </td>
+									<td class='col-change'> 
+										<t t-if='order.get_change(line)'>
+											<t t-esc='widget.format_currency_no_symbol(order.get_change(line))' />
+										 </t>
+									</td>
+									<td class='col-name'> <t t-esc='line.name' /> </td>
+									<td class='delete-button' t-att-data-cid='line.cid'> <i class='fa fa-times-circle' /> </td>
+								</tr>
+							</t>
+						</t>
+						<t t-if='extradue'>
+							<tr class='paymentline extra' t-att-data-cid='0'>
+								<td class='col-due'> <t t-esc='widget.format_currency_no_symbol(extradue)' /> </td>
+							</tr>
+						</t>
+					</tbody>
+				</table>
+			</t>
+			</t>
+		</t>
+
+		<t t-extend="OrderReceipt">
+			<t t-jquery=".receipt-change" t-operation='before'>
+				<t t-if="widget.pos.get_order().recipet">
+					<table style="min-width: 100%;margin-bottom: 10px;">
+						<tr>
+							<td>Exchanged Rate</td>
+							<td class="pos-right-align">
+								<t t-esc= "widget.pos.get_order().currency_amount"/>
+								<t t-esc= "widget.pos.get_order().currency_symbol"/>
+							</td>
+						</tr>
+					</table>
+				</t>
+			</t>
+		</t>
+</templates>

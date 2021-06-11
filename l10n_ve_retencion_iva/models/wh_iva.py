@@ -263,9 +263,9 @@ class AccountWhIva(models.Model):
             raise UserError(("El RIF para la compañía no ha sido establecido o el registro se encuentra vacio, "
                              "verifique nuevamente."))
         for wh in wh_id:
-            if not wh.company_id.rif:
+            if not wh.company_id.vat:
                 raise UserError('El RIF para la compañía %s no ha sido establecido.' % wh.company_id.name)
-            if not wh.partner_id.rif:
+            if not wh.partner_id.vat:
                 raise UserError('El RIF para el Proveedor %s no ha sido establecido.' % wh.partner_id.name)
 
             type = 'C' if wh.type in ('in_invoice', 'in_refund') else 'V'
@@ -284,12 +284,12 @@ class AccountWhIva(models.Model):
                         raise UserError('El Nro factura o Nro de Control de la factura %s no se encuentra establecido, verifique nuevamente'
                                         % whl.invoice_id.name)
                     content += '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%.2f\t%.2f\t%.2f\t%s\t%s\t%.2f\t%.2f\t%s\n' % (
-                        wh.company_id.rif.replace('-', ''),
+                        wh.company_id.vat.replace('-', ''),
                         tax_period,
                         wh.date,
                         type,
                         type_doc,
-                        wh.partner_id.rif.replace('-', ''),
+                        wh.partner_id.vat.replace('-', ''),
                         whl.invoice_id.vendor_invoice_number,
                         whl.invoice_id.control_invoice_number,
                         -whl.invoice_id.amount_total if whl.invoice_id.type == 'in_refund' else whl.invoice_id.amount_total,

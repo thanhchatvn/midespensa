@@ -262,7 +262,7 @@ class WizardSaleBookXLSX(models.TransientModel):
             col += 1
             sheet.write(row, col, get_date_format(inv.date), report_format2)
             col += 1
-            sheet.write(row, col, inv.partner_id.rif or "-", report_format2)
+            sheet.write(row, col, inv.partner_id.vat or "-", report_format2)
             col += 1
             sheet.write(row, col, inv.partner_id.name, report_format2)
             col += 1

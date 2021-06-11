@@ -23,8 +23,8 @@ from odoo.exceptions import ValidationError
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    rif = fields.Char(string="RIF", required=False)
-    cedula = fields.Char(string="Cédula")
+    vat = fields.Char(string="RIF/CI", required=False)
+    # cedula = fields.Char(string="Cédula")
     street = fields.Char(required=True)
     city = fields.Char(required=True)
     state_id = fields.Many2one(required=True)

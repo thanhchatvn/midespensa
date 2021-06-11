@@ -224,7 +224,7 @@
                                     <tr>
                                     <td><t t-esc="count"/></td>
                                     <td><span t-esc="u.date"/></td>
-                                    <td><span t-esc="u.partner_id.rif"/></td>
+                                    <td><span t-esc="u.partner_id.vat"/></td>
                                     <td><span t-esc="u.partner_id.name"/></td>
                                     <td><span t-esc="u.partner_id.residence_type"/></td>
                                     <td><span t-esc="u.name"/></td>
@@ -453,7 +453,7 @@
                         <tr>
                             <td>A<t t-esc="count"/></td>
                             <td><span t-esc="u.date"/></td>
-                            <td><span t-esc="u.partner_id.rif"/></td>
+                            <td><span t-esc="u.partner_id.vat"/></td>
                             <td><span t-esc="u.partner_id.name"/></td>
                             <td><span t-esc="u.partner_id.residence_type"/></td>
                             <td><span t-esc="u.name"/></td>

@@ -8,8 +8,7 @@
           <field name="inherit_id" ref="base.view_partner_form"/>
           <field name="arch" type="xml">
               <xpath expr="//group/group[last()]/field" position="before">
-                  <field name="rif" attrs="{'required': [('company_type', '=', 'company')]}"/>
-                  <field name="cedula" attrs="{'invisible': [('company_type', '=', 'company')], 'required': [('company_type', '=', 'person')]}"/>
+<!--                  <field name="cedula" attrs="{'invisible': [('company_type', '=', 'company')], 'required': [('company_type', '=', 'person')]}"/>-->
                   <field name="residence_type" required="True"/>
               </xpath>
           </field>
