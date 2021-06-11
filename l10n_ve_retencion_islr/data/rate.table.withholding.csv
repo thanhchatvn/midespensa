@@ -1,0 +1,4 @@
+id,rate2_id/id,lower_limit,upper_limit,percentage,subtracting
+rate_table_withholding_001,account_wh_rate_table_001,0,2000,15,0,
+rate_table_withholding_002,account_wh_rate_table_001,2001,3000,22,140
+rate_table_withholding_003,account_wh_rate_table_001,3001,0.00,34,500

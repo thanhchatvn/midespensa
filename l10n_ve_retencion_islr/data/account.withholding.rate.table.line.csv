@@ -1,0 +1,87 @@
+id,table_id/id,code,concept,person_type,percentage_amount_base,apply_up_to,percentage,variable,rate2,apply_subtracting
+account_wh_rate_line_001,account_wh_rate_table_001,1,Sueldos y Salarios,PNR,,0.01,,1,,
+account_wh_rate_line_002,account_wh_rate_table_001,2,Honorarios Profesionales No Mercantiles,PNR,100,125000.00,3,,,
+account_wh_rate_line_003,account_wh_rate_table_001,3,Honorarios Profesionales No Mercantiles,PNNR,90,0.01,34,,,
+account_wh_rate_line_004,account_wh_rate_table_001,4,Honorarios Profesionales No Mercantiles,PJD,100,0.01,5,,,
+account_wh_rate_line_005,account_wh_rate_table_001,5,Honorarios Profesionales No Mercantiles,PJND,90,0.01,,,1,
+account_wh_rate_line_006,account_wh_rate_table_001,6,Honorarios Profesionales Mancomunados No Mercantiles,PNR,100,125000.00,3,,0,1
+account_wh_rate_line_007,account_wh_rate_table_001,7,Honorarios Profesionales Mancomunados No Mercantiles,PNNR,90,0.01,34,,0,0
+account_wh_rate_line_008,account_wh_rate_table_001,8,Honorarios Profesionales Mancomunados No Mercantiles,PJD,100,0.01,5,,0,0
+account_wh_rate_line_009,account_wh_rate_table_001,9,Honorarios Profesionales Mancomunados No Mercantiles,PJND,100,0.01,,,1,0
+account_wh_rate_line_010,account_wh_rate_table_001,10,"Honorarios Profesionales pagados a Jinetes, Veterinarios, Preparadores o Entrenadores",PNR,100,125000.00,3,,0,1
+account_wh_rate_line_011,account_wh_rate_table_001,11,"Honorarios Profesionales pagados a Jinetes, Veterinarios, Preparadores o Entrenadores",PNNR,90,0.01,34,,0,0
+account_wh_rate_line_012,account_wh_rate_table_001,12,"Honorarios Profesionales pagados por Clínicas, Hospitales, Centros de Salud, Bufetes, Escritorios,Oficinas, Colegios Profesionales u otra InstituciónProfesionales No Mercantiles a Profesionales sin relación de dependencia",PNR,100,125000.00,3,,0,1
+account_wh_rate_line_013,account_wh_rate_table_001,13,"Honorarios Profesionales pagados por Clínicas, Hospitales, Centros de Salud, Bufetes, Escritorios,Oficinas, Colegios Profesionales u otra InstituciónProfesionales No Mercantiles a Profesionales sin relación de dependencia",PNNR,90,0.01,34,,0,0
+account_wh_rate_line_014,account_wh_rate_table_001,14,Comisiones pagadas por la venta de bienes inmuebles,PNR,100,125000.00,3,,0,1
+account_wh_rate_line_015,account_wh_rate_table_001,15,Comisiones pagadas por la venta de bienes inmuebles,PNNR,100,0.01,34,,0,0
+account_wh_rate_line_016,account_wh_rate_table_001,16,Comisiones pagadas por la venta de bienes inmuebles,PJD,100,0.01,5,,0,0
+account_wh_rate_line_017,account_wh_rate_table_001,17,Comisiones pagadas por la venta de bienes inmuebles,PJND,100,0.01,5,,0,0
+account_wh_rate_line_018,account_wh_rate_table_001,18,Comisiones distintas a Remuneraciones Sueldos y Salarios,PNR,100,125000.00,3,,,1
+account_wh_rate_line_019,account_wh_rate_table_001,19,Comisiones distintas a Remuneraciones Sueldos y Salarios,PNNR,100,0.01,34,,,
+account_wh_rate_line_020,account_wh_rate_table_001,20,Comisiones distintas a Remuneraciones Sueldos y Salarios,PJD,100,0.01,5,,,
+account_wh_rate_line_021,account_wh_rate_table_001,21,Comisiones distintas a Remuneraciones Sueldos y Salarios,PJND,100,0.01,5,,,
+account_wh_rate_line_022,account_wh_rate_table_001,22,Intereses de Capitales tomados en préstamo e invertidos en la producción de la renta,PNNR,95,0.01,34,,,
+account_wh_rate_line_023,account_wh_rate_table_001,23,Intereses de Capitales tomados en préstamo e invertidos en la producción de la renta,PJND,100,0.01,0,,1,0
+account_wh_rate_line_024,account_wh_rate_table_001,24,Intereses provenientes de préstamos y otros créditos pagaderos a instituciones financieras constituidas en el exterior y no domiciliadas en el país,PJND,100,0.01,4.5,,,
+account_wh_rate_line_025,account_wh_rate_table_001,25,"Intereses pagados por las personas jurídicas o comunidades a cualquier otra persona natural, jurídica o comunidad",PNR,100,125000.00,3,,0,1
+account_wh_rate_line_026,account_wh_rate_table_001,26,"Intereses pagados por las personas jurídicas o comunidades a cualquier otra persona natural, jurídica o comunidad",PNNR,95,0.01,34,,,
+account_wh_rate_line_027,account_wh_rate_table_001,27,"Intereses pagados por las personas jurídicas o comunidades a cualquier otra persona natural, jurídica o comunidad",PJD,100,0.01,5,,,
+account_wh_rate_line_028,account_wh_rate_table_001,28,"Intereses pagados por las personas jurídicas o comunidades a cualquier otra persona natural, jurídica o comunidad",PJND,95,0.01,,,1,
+account_wh_rate_line_029,account_wh_rate_table_001,29,Enriquecimientos Netos de las Agencias Internacionales cuando el pagador sea una personas jurídica o comunidad domiciliada en el país,PJND,15,0.01,,,1,
+account_wh_rate_line_030,account_wh_rate_table_001,30,Enriquecimientos Netos de Gastos de Transporte conformados por fletes pagados a agencias o empresas de transporte internacional constituidas y domiciliadas en el exterior,PNNR,5,0.01,,,1,
+account_wh_rate_line_031,account_wh_rate_table_001,31,Enriquecimientos Netos de Gastos de Transporte conformados por fletes pagados a agencias o empresas de transporte internacional constituidas y domiciliadas en el exterior,PJND,100,0.01,,,1,
+account_wh_rate_line_032,account_wh_rate_table_001,32,"Enriquecimientos Netos de Exhibición de Películas, Cine o la Televisión",PNNR,25,0.01,34,,,
+account_wh_rate_line_033,account_wh_rate_table_001,33,"Enriquecimientos Netos de Exhibición de Películas, Cine o la Televisión",PJND,25,0.01,,,1,
+account_wh_rate_line_034,account_wh_rate_table_001,34,Enriquecimientos obtenidos por concepto de regalías y demás participaciones análogas,PNNR,90,0.01,34,,,
+account_wh_rate_line_035,account_wh_rate_table_001,35,Enriquecimientos obtenidos por concepto de regalías y demás participaciones análogas,PJND,90,0.01,,,1,
+account_wh_rate_line_036,account_wh_rate_table_001,36,"Enriquecimientos obtenidos por las Remuneraciones, Honorarios y pagos análogos por Asistencia Técnica",PNNR,30,0.01,34,,,
+account_wh_rate_line_037,account_wh_rate_table_001,37,"Enriquecimientos obtenidos por las Remuneraciones, Honorarios y pagos análogos por Asistencia Técnica",PJND,30,0.01,,,1,
+account_wh_rate_line_038,account_wh_rate_table_001,38,Enriquecimientos obtenidos por Servicios Tecnológicos utilizados en el país o cedidos a Terceros,PNNR,50,0.01,34,,,
+account_wh_rate_line_039,account_wh_rate_table_001,39,Enriquecimientos obtenidos por Servicios Tecnológicos utilizados en el país o cedidos a Terceros,PJND,50,0.01,,,1,
+account_wh_rate_line_040,account_wh_rate_table_001,40,Enriquecimientos Netos derivados de las Primas de Seguros y Reaseguros,PJND,30,0.01,10,,,
+account_wh_rate_line_041,account_wh_rate_table_001,41,Ganancias Obtenidas por Juegos y Apuestas,PNR,100,0.01,34,,,
+account_wh_rate_line_042,account_wh_rate_table_001,42,Ganancias Obtenidas por Juegos y Apuestas,PNNR,100,0.01,34,,,
+account_wh_rate_line_043,account_wh_rate_table_001,43,Ganancias Obtenidas por Juegos y Apuestas,PJD,100,0.01,34,,,
+account_wh_rate_line_044,account_wh_rate_table_001,44,Ganancias Obtenidas por Juegos y Apuestas,PJND,100,0.01,34,,,
+account_wh_rate_line_045,account_wh_rate_table_001,45,Ganancias Obtenidas por Premios de Loterías y de Hipódromos,PNR,100,0.01,16,,,
+account_wh_rate_line_046,account_wh_rate_table_001,46,Ganancias Obtenidas por Premios de Loterías y de Hipódromos,PNNR,100,0.01,16,,,
+account_wh_rate_line_047,account_wh_rate_table_001,47,Ganancias Obtenidas por Premios de Loterías y de Hipódromos,PJD,100,0.01,16,,,
+account_wh_rate_line_048,account_wh_rate_table_001,48,Ganancias Obtenidas por Premios de Loterías y de Hipódromos,PJND,100,0.01,16,,,
+account_wh_rate_line_049,account_wh_rate_table_001,49,Pagos a Propietarios de Animales de Carrera por concepto de Premios,PNR,100,125000.00,3,,,1
+account_wh_rate_line_050,account_wh_rate_table_001,50,Pagos a Propietarios de Animales de Carrera por concepto de Premios,PNNR,100,0.01,34,,,
+account_wh_rate_line_051,account_wh_rate_table_001,51,Pagos a Propietarios de Animales de Carrera por concepto de Premios,PJD,100,0.01,5,,,
+account_wh_rate_line_052,account_wh_rate_table_001,52,Pagos a Propietarios de Animales de Carrera por concepto de Premios,PJND,100,0.01,5,,,
+account_wh_rate_line_053,account_wh_rate_table_001,53,Pagos a Empresas Contratistas o Subcontratistas por la ejecución de obras o de la prestación de servicios en base a valuaciones y ordenes de pago,PNR,100,125000.00,1,,,1
+account_wh_rate_line_054,account_wh_rate_table_001,54,Pagos a Empresas Contratistas o Subcontratistas por la ejecución de obras o de la prestación de servicios en base a valuaciones y ordenes de pago,PNNR,100,0.01,34,,,
+account_wh_rate_line_055,account_wh_rate_table_001,55,Pagos a Empresas Contratistas o Subcontratistas por la ejecución de obras o de la prestación de servicios en base a valuaciones y ordenes de pago,PJD,100,0.01,2,,,
+account_wh_rate_line_056,account_wh_rate_table_001,56,Pagos a Empresas Contratistas o Subcontratistas por la ejecución de obras o de la prestación de servicios en base a valuaciones y ordenes de pago,PJND,100,0.01,,,1,
+account_wh_rate_line_057,account_wh_rate_table_001,57,Pagos de los Administradores de bienes inmuebles a los Arrendadores de los bienes inmuebles situados en el país,PNR,100,125000.00,3,,,1
+account_wh_rate_line_058,account_wh_rate_table_001,58,Pagos de los Administradores de bienes inmuebles a los Arrendadores de los bienes inmuebles situados en el país,PNNR,90,0.01,34,,,
+account_wh_rate_line_059,account_wh_rate_table_001,59,Pagos de los Administradores de bienes inmuebles a los Arrendadores de los bienes inmuebles situados en el país,PJD,100,0.01,5,,,
+account_wh_rate_line_060,account_wh_rate_table_001,60,Pagos de los Administradores de bienes inmuebles a los Arrendadores de los bienes inmuebles situados en el país,PJND,90,0.01,,,1,
+account_wh_rate_line_061,account_wh_rate_table_001,61,Cánones de Arrendamiento de Bienes Muebles situados en el pais,PNR,100,125000.00,3,,,1
+account_wh_rate_line_062,account_wh_rate_table_001,62,Cánones de Arrendamiento de Bienes Muebles situados en el pais,PNNR,100,0.01,34,,,
+account_wh_rate_line_063,account_wh_rate_table_001,63,Cánones de Arrendamiento de Bienes Muebles situados en el pais,PJD,100,0.01,5,,,
+account_wh_rate_line_064,account_wh_rate_table_001,64,Cánones de Arrendamiento de Bienes Muebles situados en el pais,PJND,100,0.01,5,,,
+account_wh_rate_line_065,account_wh_rate_table_001,65,"Pagos de las Empresas Emisoras de Tarjetas de Crédito o Consumo por la Venta de Bienes y servicios, o cualquier otro concepto",PNR,100,0.01,3,,,
+account_wh_rate_line_066,account_wh_rate_table_001,66,"Pagos de las Empresas Emisoras de Tarjetas de Crédito o Consumo por la Venta de Bienes y servicios, o cualquier otro concepto",PNNR,100,0.01,34,,,
+account_wh_rate_line_067,account_wh_rate_table_001,67,"Pagos de las Empresas Emisoras de Tarjetas de Crédito o Consumo por la Venta de Bienes y servicios, o cualquier otro concepto",PJD,100,0.01,5,,,
+account_wh_rate_line_068,account_wh_rate_table_001,68,"Pagos de las Empresas Emisoras de Tarjetas de Crédito o Consumo por la Venta de Bienes y servicios, o cualquier otro concepto",PJND,100,0.01,5,,,
+account_wh_rate_line_069,account_wh_rate_table_001,69,Pagos de las Empresas Emisoras de Tarjetas de Crédito por la venta de gasolina en las Estaciones de Servicios,PNR,100,0.01,1,,,
+account_wh_rate_line_070,account_wh_rate_table_001,70,Pagos de las Empresas Emisoras de Tarjetas de Crédito por la venta de gasolina en las Estaciones de Servicios,PJD,100,0.01,1,,,
+account_wh_rate_line_071,account_wh_rate_table_001,71,Pagos por Gastos de Transporte conformados por Fletes,PNR,100,125000.00,1,,,1
+account_wh_rate_line_072,account_wh_rate_table_001,72,Pagos por Gastos de Transporte conformados por Fletes,PJD,100,0.01,3,,,
+account_wh_rate_line_073,account_wh_rate_table_001,73,Fletes Pagados a Personas Naturales o Jurídicas Domiciliadas en el Pais,PNNR,100,0.01,3,,,
+account_wh_rate_line_074,account_wh_rate_table_001,74,Fletes Pagados a Personas Naturales o Jurídicas Domiciliadas en el Pais,PJD,100,0.01,5,,,
+account_wh_rate_line_075,account_wh_rate_table_001,75,Pagos de las Empresas de Seguro a sus Contratistas por la Reparación de Daños sufridos de sus Asegurados,PNR,100,125000.00,3,,,1
+account_wh_rate_line_076,account_wh_rate_table_001,76,Pagos de las Empresas de Seguro a sus Contratistas por la Reparación de Daños sufridos de sus Asegurados,PJD,100,0.01,5,,,
+account_wh_rate_line_077,account_wh_rate_table_001,77,"Pagos de las Empresas de Seguros a Clínicas, Hospitales y/o Centros de Salud por la Atención Medica a sus Asegurados",PNR,100,125000.00,3,,,1
+account_wh_rate_line_078,account_wh_rate_table_001,78,"Pagos de las Empresas de Seguros a Clínicas, Hospitales y/o Centros de Salud por la Atención Medica a sus Asegurados",PJD,100,0.01,5,,,
+account_wh_rate_line_079,account_wh_rate_table_001,79,Cantidades que se paguen por adquisición de Fondos de Comercio situados en el país,PNR,100,125000.00,3,,,1
+account_wh_rate_line_080,account_wh_rate_table_001,80,Cantidades que se paguen por adquisición de Fondos de Comercio situados en el país,PNNR,100,0.01,34,,,
+account_wh_rate_line_081,account_wh_rate_table_001,81,Cantidades que se paguen por adquisición de Fondos de Comercio situados en el país,PJD,100,0.01,5,,,
+account_wh_rate_line_082,account_wh_rate_table_001,82,Cantidades que se paguen por adquisición de Fondos de Comercio situados en el país,PJND,100,0.01,5,,,
+account_wh_rate_line_083,account_wh_rate_table_001,83,Pagos por Servicios de Publicidad y Propaganda y la Cesión de la Venta de Espacios para tales fines,PNR,100,125000.00,3,,,1
+account_wh_rate_line_084,account_wh_rate_table_001,84,Pagos por Servicios de Publicidad y Propaganda y la Cesión de la Venta de Espacios para tales fines,PJD,100,0.01,5,,,
+account_wh_rate_line_085,account_wh_rate_table_001,85,Pagos por Servicios de Publicidad y Propaganda y la Cesión de la Venta de Espacios para tales fines,PJND,100,0.01,5,,,
+account_wh_rate_line_086,account_wh_rate_table_001,86,Pagos por Servicios de Publicidad y Propaganda a Emisoras Radiodifusoras,PJD,100,0.01,3,,,

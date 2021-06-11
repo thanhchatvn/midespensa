@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form_l10n_ve_retencion_islr" model="ir.ui.view">
+            <field name="name">res.config.view.inherited.config.l10n_ve_retencion_islr</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="30"/>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='account']/div[2]" position="after">
+                    <h2>ISLR tax withholding</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="retention_islr">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Withholding tax ISLR</span>
+                                <div class="text-muted">
+                                    Default accounts for ISLR withholdings
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Islr account retention (purchase) " for="retention_islr_account_id"  class="col-lg-3 o_light_label"/>
+                                        <field name="retention_islr_account_id" class="o_light_label mt16"  context="{'active_test': False}"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Islr account retention (sale)" for="sale_islr_ret_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="sale_islr_ret_account_id" class="o_light_label mt16" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="table_islr">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">ISLR Table</span>
+                                <div class="text-muted">
+                                    Default table for ISLR withholding
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="ISLR Table" for="table_islr_id" class="col-lg-3 o_light_label"/>
+                                        <field name="table_islr_id" class="o_light_label"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label string="Subtracting 1%" for="percentage_subtracting_1" class="col-lg-3 o_light_label"/>
+                                        <field name="percentage_subtracting_1" class="o_light_label"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label string="Subtracting 3%" for="percentage_subtracting_3" class="col-lg-3 o_light_label"/>
+                                        <field name="percentage_subtracting_3" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="tax_unit">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Tax Unit</span>
+                                <div class="text-muted">
+                                    Tax unit registration for ISLR
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Tax Unit" for="tax_unit" class="col-lg-3 o_light_label"/>
+                                        <field name="tax_unit" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

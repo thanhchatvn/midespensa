@@ -261,15 +261,15 @@ class AccountWhIslr(models.Model):
         company_id = withholding.company_id
         s = ''
         self.clear_caches()
-        if not company_id.rif:
+        if not company_id.vat:
             raise UserError(_(
                 "El RIF para la compañía no ha sido establecido o el registro se encuentra vacio, verifique nuevamente."))
-        root = ET.Element("RelacionRetencionesISLR", RifAgente=s.join(company_id.rif.split('-')), Periodo=period)
+        root = ET.Element("RelacionRetencionesISLR", RifAgente=s.join(company_id.vat.split('-')), Periodo=period)
         # ~ doc = ET.SubElement(root, "doc")
         for hw in withholding:
-            if not hw.partner_id.rif:
+            if not hw.partner_id.vat:
                 raise UserError(_("El Cliente o Proveedor %s no posee rif.") % hw.partner_id.name)
-            rif = hw.partner_id.rif.split('-')
+            rif = hw.partner_id.vat.split('-')
             rif = ''.join(rif)
             code_withholding = hw.code_withholding
             for hwl in hw.withholding_line:

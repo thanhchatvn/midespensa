@@ -1,37 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="928b7203-ed32-4879-9390-594c1d2c419a" name="Default Changelist" comment="[IMP] Correcciones de localización y modulo de POS para multimoneda">
-      <change afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/rate.table.withholding.csv" afterDir="false" />
+    <list default="true" id="928b7203-ed32-4879-9390-594c1d2c419a" name="Default Changelist" comment="[ADD] Agregando modulo de mostrar doble moneda wn POS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/__manifest__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/i18n/es.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/account_tax.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/company.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/invoice.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/models/partner.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/reports/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/reports/fiscal_invoice.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/reports/internal_layout_laws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/security/ir.model.access.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/static/description/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/account_invoice_view.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/account_menu.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/account_tax_view.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/company_view.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_fiscal_requirements/views/partner_view.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/__manifest__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.concept.csv" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.concept.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.rate.table.csv" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.rate.table.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.rate.table.line.csv" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/account.withholding.rate.table.line.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/rate.table.withholding.csv" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/data/rate.table.withholding.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/i18n/es.po" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/i18n/es.po" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/account_move.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/account_move.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/res_company_islr.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/res_company_islr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/res_config_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/res_config_settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr_rate_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/models/wh_islr_rate_table.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/report_islr_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/report_islr_template.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/withholding_receipt_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/reports/withholding_receipt_template.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l10n_ve_retencion_islr/security/ir.model.access.csv" beforeDir="false" afterPath="$PROJECT_DIR$/l10n_ve_retencion_islr/security/ir.model.access.csv" afterDir="false" />
@@ -65,6 +42,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/l10n_ve_retencion_islr" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -104,7 +82,21 @@
       <option name="project" value="LOCAL" />
       <updated>1623410575788</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="[IMP] Correcciones de localización y modulo de POS para multimoneda">
+      <created>1623413113504</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1623413113504</updated>
+    </task>
+    <task id="LOCAL-00006" summary="[ADD] Agregando modulo de mostrar doble moneda wn POS">
+      <created>1623413240904</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1623413240904</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -123,6 +115,7 @@
     <MESSAGE value="[ADD] Agregando modulo de restricciones para el POS" />
     <MESSAGE value="[ADD] Agregando modulo de multimoneda para el POS" />
     <MESSAGE value="[IMP] Correcciones de localización y modulo de POS para multimoneda" />
-    <option name="LAST_COMMIT_MESSAGE" value="[IMP] Correcciones de localización y modulo de POS para multimoneda" />
+    <MESSAGE value="[ADD] Agregando modulo de mostrar doble moneda wn POS" />
+    <option name="LAST_COMMIT_MESSAGE" value="[ADD] Agregando modulo de mostrar doble moneda wn POS" />
   </component>
 </project>
